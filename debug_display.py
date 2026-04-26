@@ -105,6 +105,7 @@ def transform(image: Image.Image, *, swap_red_blue: bool, invert_colors: bool) -
 
 
 def show_raw(display: TFTDisplay, image: Image.Image) -> None:
+    print("sending image size", image.size)
     display.disp.display(image.convert("RGB"))
 
 
