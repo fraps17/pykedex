@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Protocol
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 try:
     from .input import Button
@@ -30,6 +30,8 @@ class DisplayConfig:
     width: int = 160
     height: int = 128
     scale: int = 4
+    swap_red_blue: bool = True
+    invert_colors: bool = True
 
     @property
     def size(self) -> tuple[int, int]:
@@ -55,6 +57,11 @@ class TFTDisplay:
     def render(self, image: Image.Image) -> None:
         if image.mode != "RGB":
             image = image.convert("RGB")
+        if self.config.swap_red_blue:
+            red, green, blue = image.split()
+            image = Image.merge("RGB", (blue, green, red))
+        if self.config.invert_colors:
+            image = ImageOps.invert(image)
         self.disp.display(image)
 
     def poll(self) -> bool:

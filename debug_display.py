@@ -64,7 +64,21 @@ def grid() -> Image.Image:
 
 
 def main() -> None:
-    display = TFTDisplay(DisplayConfig(width=WIDTH, height=HEIGHT, scale=1))
+    raw_config = DisplayConfig(
+        width=WIDTH,
+        height=HEIGHT,
+        scale=1,
+        swap_red_blue=False,
+        invert_colors=False,
+    )
+    corrected_config = DisplayConfig(
+        width=WIDTH,
+        height=HEIGHT,
+        scale=1,
+        swap_red_blue=True,
+        invert_colors=True,
+    )
+    display = TFTDisplay(raw_config)
     tests = [
         ("red", solid((255, 0, 0))),
         ("green", solid((0, 255, 0))),
@@ -77,8 +91,17 @@ def main() -> None:
     ]
 
     while True:
+        print("raw output")
+        display.config = raw_config
         for name, image in tests:
-            print(f"showing {name}")
+            print(f"showing raw {name}")
+            display.render(image)
+            time.sleep(2)
+
+        print("corrected output: swap_red_blue=True, invert_colors=True")
+        display.config = corrected_config
+        for name, image in tests:
+            print(f"showing corrected {name}")
             display.render(image)
             time.sleep(2)
 
