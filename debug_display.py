@@ -130,8 +130,6 @@ def main() -> None:
                     invert_colors=False,
                 )
             )
-            display.disp.width = width
-            display.disp.height = height
             print("disp width", getattr(display.disp, "width", None))
             print("disp height", getattr(display.disp, "height", None))
 
