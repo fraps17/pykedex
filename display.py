@@ -43,9 +43,11 @@ class TFTDisplay:
         self.config = config
         self.disp = ST7735.ST7735(
             port=0,
-            cs=0,
-            dc=24,
-            rst=25,
+            cs=ST7735.BG_SPI_CS_BACK,
+            dc="GPIO24",
+            rst="GPIO25",
+            backlight="GPIO18",
+            rotation=90,
             spi_speed_hz=4000000,
         )
         self.disp.begin()
