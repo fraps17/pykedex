@@ -40,6 +40,7 @@ class PokedexApp:
         self.config = config
         self.display: Display | None = None
         self.running = False
+        self.dirty = True
         self.pokemon = self._load_pokemon()
         self.selected_pokemon = 0
         self.current_screen: Screen = HomeScreen(config.logical_size, can_quit=not config.is_raspberry)
@@ -47,9 +48,11 @@ class PokedexApp:
     def set_display(self, display: Display) -> None:
         self.display = display
         self.current_screen = HomeScreen(display.size, can_quit=not self.config.is_raspberry)
+        self.dirty = True
 
     def handle_button(self, button: Button) -> None:
         action = self.current_screen.handle_button(button)
+        self.dirty = True
         self._handle_action(action)
 
     def run(self) -> None:
@@ -69,8 +72,10 @@ class PokedexApp:
 
                 action = self.current_screen.update(dt)
                 self._handle_action(action)
-                self.current_screen.draw(image)
-                self.display.render(image)
+                if self.dirty:
+                    self.current_screen.draw(image)
+                    self.display.render(image)
+                    self.dirty = False
 
                 if not self.display.poll():
                     self.running = False
@@ -93,10 +98,14 @@ class PokedexApp:
             self.running = False
         elif action == "home":
             self.current_screen = HomeScreen(self.display.size, can_quit=not self.config.is_raspberry)
+            self.dirty = True
         elif action == "pokemon_list":
             self.current_screen = PokemonListScreen(self.display.size, self.pokemon, self.selected_pokemon)
+            self.dirty = True
         elif action.startswith("pokemon_detail:"):
             self.selected_pokemon = int(action.split(":", 1)[1])
             self.current_screen = PokemonDetailScreen(self.display.size, self.pokemon, self.selected_pokemon)
+            self.dirty = True
         elif action == "settings":
             self.current_screen = SettingsScreen(self.display.size)
+            self.dirty = True

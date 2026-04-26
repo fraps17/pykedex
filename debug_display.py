@@ -4,8 +4,14 @@ from PIL import Image, ImageDraw
 
 try:
     from .display import DisplayConfig, TFTDisplay
+    from .screens.home import HomeScreen
+    from .screens.pokemon_list import PokemonListScreen
+    from .screens.pokemon_detail import PokemonDetailScreen
 except ImportError:
     from display import DisplayConfig, TFTDisplay
+    from screens.home import HomeScreen
+    from screens.pokemon_list import PokemonListScreen
+    from screens.pokemon_detail import PokemonDetailScreen
 
 
 SIZE = (160, 128)
@@ -56,6 +62,12 @@ def inset_borders() -> Image.Image:
     return image
 
 
+def screen_image(screen: object) -> Image.Image:
+    image = Image.new("RGB", SIZE, (0, 0, 0))
+    screen.draw(image)
+    return image
+
+
 def main() -> None:
     display = TFTDisplay(DisplayConfig(width=160, height=128, scale=1))
     print("disp public width", getattr(display.disp, "width", None))
@@ -66,6 +78,26 @@ def main() -> None:
     print("disp offset_left", getattr(display.disp, "_offset_left", None))
     print("disp offset_top", getattr(display.disp, "_offset_top", None))
 
+    pokemon = [
+        {
+            "id": 25,
+            "name": "Pikachu",
+            "types": ["Electric"],
+            "height": 0.4,
+            "weight": 6.0,
+            "description": "A mouse Pokemon from deep forests, known for stored electrical energy.",
+            "stats": {"hp": 35, "atk": 55, "def": 40},
+        },
+        {
+            "id": 1,
+            "name": "Bulbasaur",
+            "types": ["Grass", "Poison"],
+            "height": 0.7,
+            "weight": 6.9,
+            "description": "A seed Pokemon from open grasslands.",
+            "stats": {"hp": 45, "atk": 49, "def": 49},
+        },
+    ]
     tests = [
         ("red", solid((255, 0, 0))),
         ("green", solid((0, 255, 0))),
@@ -76,6 +108,9 @@ def main() -> None:
         ("corners", corners()),
         ("center blocks", center_blocks()),
         ("inset borders", inset_borders()),
+        ("home screen", screen_image(HomeScreen(SIZE, can_quit=False))),
+        ("pokemon list", screen_image(PokemonListScreen(SIZE, pokemon))),
+        ("pokemon detail", screen_image(PokemonDetailScreen(SIZE, pokemon, 0))),
     ]
 
     index = 0
