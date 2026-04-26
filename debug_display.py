@@ -109,54 +109,46 @@ def show_raw(display: TFTDisplay, image: Image.Image) -> None:
 
 
 def main() -> None:
-    variants = [
-        ("explicit 160x128", (160, 128)),
-        ("explicit 128x160", (128, 160)),
+    display = TFTDisplay(
+        DisplayConfig(
+            width=160,
+            height=128,
+            scale=1,
+            swap_red_blue=False,
+            invert_colors=False,
+        )
+    )
+    size = (
+        int(getattr(display.disp, "width")),
+        int(getattr(display.disp, "height")),
+    )
+    print("driver-reported width", size[0])
+    print("driver-reported height", size[1])
+    tests = [
+        ("red", solid(size, (255, 0, 0))),
+        ("green", solid(size, (0, 255, 0))),
+        ("blue", solid(size, (0, 0, 255))),
+        ("white", solid(size, (255, 255, 255))),
+        ("black", solid(size, (0, 0, 0))),
+        ("corners", corners(size)),
+        ("stripes", stripes(size)),
+        ("center blocks", center_blocks(size)),
+        ("inset borders", inset_borders(size)),
+        ("thick grid", grid(size)),
     ]
-    display = None
 
     index = 0
     while True:
-        variant_name, size = variants[index % len(variants)]
-        width, height = size
-        if display is None or display.config.size != size:
-            print(f"initializing {variant_name}")
-            display = TFTDisplay(
-                DisplayConfig(
-                    width=width,
-                    height=height,
-                    scale=1,
-                    swap_red_blue=False,
-                    invert_colors=False,
-                )
-            )
-            print("disp width", getattr(display.disp, "width", None))
-            print("disp height", getattr(display.disp, "height", None))
-
-        tests = [
-            ("red", solid(size, (255, 0, 0))),
-            ("green", solid(size, (0, 255, 0))),
-            ("blue", solid(size, (0, 0, 255))),
-            ("white", solid(size, (255, 255, 255))),
-            ("black", solid(size, (0, 0, 0))),
-            ("corners", corners(size)),
-            ("stripes", stripes(size)),
-            ("center blocks", center_blocks(size)),
-            ("inset borders", inset_borders(size)),
-            ("thick grid", grid(size)),
-        ]
-
-        print(f"variant: {variant_name}")
-        for name, image in tests:
-            print(f"showing {variant_name}: corrected {name}")
-            transformed = transform(
-                image,
-                swap_red_blue=True,
-                invert_colors=True,
-            )
-            show_raw(display, transformed)
-            input("press Enter for next test...")
-        index += 1
+        name, image = tests[index]
+        print(f"showing corrected {name} at {size[0]}x{size[1]}")
+        transformed = transform(
+            image,
+            swap_red_blue=True,
+            invert_colors=True,
+        )
+        show_raw(display, transformed)
+        input("press Enter for next test...")
+        index = (index + 1) % len(tests)
 
 
 if __name__ == "__main__":
