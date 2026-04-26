@@ -1,0 +1,2336 @@
+{
+  "pokemon": [
+    {
+      "id": 1,
+      "name": "Bulbasaur",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 0.7,
+      "weight": 6.9,
+      "description": "A seed Pokemon from open grasslands, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 45,
+        "atk": 49,
+        "def": 49
+      }
+    },
+    {
+      "id": 2,
+      "name": "Ivysaur",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 1.0,
+      "weight": 13.0,
+      "description": "A seed Pokemon from open grasslands, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 62,
+        "def": 63
+      }
+    },
+    {
+      "id": 3,
+      "name": "Venusaur",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 2.0,
+      "weight": 100.0,
+      "description": "A seed Pokemon from open grasslands, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 82,
+        "def": 83
+      }
+    },
+    {
+      "id": 4,
+      "name": "Charmander",
+      "types": [
+        "Fire"
+      ],
+      "height": 0.6,
+      "weight": 8.5,
+      "description": "A lizard Pokemon from rocky mountains, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 39,
+        "atk": 52,
+        "def": 43
+      }
+    },
+    {
+      "id": 5,
+      "name": "Charmeleon",
+      "types": [
+        "Fire"
+      ],
+      "height": 1.1,
+      "weight": 19.0,
+      "description": "A flame Pokemon from rocky mountains, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 58,
+        "atk": 64,
+        "def": 58
+      }
+    },
+    {
+      "id": 6,
+      "name": "Charizard",
+      "types": [
+        "Fire",
+        "Flying"
+      ],
+      "height": 1.7,
+      "weight": 90.5,
+      "description": "A flame Pokemon from rocky mountains, known for intense body heat and fire and flying traits.",
+      "stats": {
+        "hp": 78,
+        "atk": 84,
+        "def": 78
+      }
+    },
+    {
+      "id": 7,
+      "name": "Squirtle",
+      "types": [
+        "Water"
+      ],
+      "height": 0.5,
+      "weight": 9.0,
+      "description": "A tiny turtle Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 44,
+        "atk": 48,
+        "def": 65
+      }
+    },
+    {
+      "id": 8,
+      "name": "Wartortle",
+      "types": [
+        "Water"
+      ],
+      "height": 1.0,
+      "weight": 22.5,
+      "description": "A turtle Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 59,
+        "atk": 63,
+        "def": 80
+      }
+    },
+    {
+      "id": 9,
+      "name": "Blastoise",
+      "types": [
+        "Water"
+      ],
+      "height": 1.6,
+      "weight": 85.5,
+      "description": "A shellfish Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 79,
+        "atk": 83,
+        "def": 100
+      }
+    },
+    {
+      "id": 10,
+      "name": "Caterpie",
+      "types": [
+        "Bug"
+      ],
+      "height": 0.3,
+      "weight": 2.9,
+      "description": "A worm Pokemon from deep forests, known for quick, adaptive movement and bug traits.",
+      "stats": {
+        "hp": 45,
+        "atk": 30,
+        "def": 35
+      }
+    },
+    {
+      "id": 11,
+      "name": "Metapod",
+      "types": [
+        "Bug"
+      ],
+      "height": 0.7,
+      "weight": 9.9,
+      "description": "A cocoon Pokemon from deep forests, known for quick, adaptive movement and bug traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 20,
+        "def": 55
+      }
+    },
+    {
+      "id": 12,
+      "name": "Butterfree",
+      "types": [
+        "Bug",
+        "Flying"
+      ],
+      "height": 1.1,
+      "weight": 32.0,
+      "description": "A butterfly Pokemon from deep forests, known for quick, adaptive movement and bug and flying traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 45,
+        "def": 50
+      }
+    },
+    {
+      "id": 13,
+      "name": "Weedle",
+      "types": [
+        "Bug",
+        "Poison"
+      ],
+      "height": 0.3,
+      "weight": 3.2,
+      "description": "A hairy bug Pokemon from deep forests, known for quick, adaptive movement and bug and poison traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 35,
+        "def": 30
+      }
+    },
+    {
+      "id": 14,
+      "name": "Kakuna",
+      "types": [
+        "Bug",
+        "Poison"
+      ],
+      "height": 0.6,
+      "weight": 10.0,
+      "description": "A cocoon Pokemon from deep forests, known for quick, adaptive movement and bug and poison traits.",
+      "stats": {
+        "hp": 45,
+        "atk": 25,
+        "def": 50
+      }
+    },
+    {
+      "id": 15,
+      "name": "Beedrill",
+      "types": [
+        "Bug",
+        "Poison"
+      ],
+      "height": 1.0,
+      "weight": 29.5,
+      "description": "A poison bee Pokemon from deep forests, known for quick, adaptive movement and bug and poison traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 90,
+        "def": 40
+      }
+    },
+    {
+      "id": 16,
+      "name": "Pidgey",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 0.3,
+      "weight": 1.8,
+      "description": "A tiny bird Pokemon from deep forests, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 45,
+        "def": 40
+      }
+    },
+    {
+      "id": 17,
+      "name": "Pidgeotto",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 1.1,
+      "weight": 30.0,
+      "description": "A bird Pokemon from deep forests, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 63,
+        "atk": 60,
+        "def": 55
+      }
+    },
+    {
+      "id": 18,
+      "name": "Pidgeot",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 1.5,
+      "weight": 39.5,
+      "description": "A bird Pokemon from deep forests, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 83,
+        "atk": 80,
+        "def": 75
+      }
+    },
+    {
+      "id": 19,
+      "name": "Rattata",
+      "types": [
+        "Normal"
+      ],
+      "height": 0.3,
+      "weight": 3.5,
+      "description": "A mouse Pokemon from open grasslands, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 30,
+        "atk": 56,
+        "def": 35
+      }
+    },
+    {
+      "id": 20,
+      "name": "Raticate",
+      "types": [
+        "Normal"
+      ],
+      "height": 0.7,
+      "weight": 18.5,
+      "description": "A mouse Pokemon from open grasslands, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 81,
+        "def": 60
+      }
+    },
+    {
+      "id": 21,
+      "name": "Spearow",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 0.3,
+      "weight": 2.0,
+      "description": "A tiny bird Pokemon from rough terrain, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 60,
+        "def": 30
+      }
+    },
+    {
+      "id": 22,
+      "name": "Fearow",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 1.2,
+      "weight": 38.0,
+      "description": "A beak Pokemon from rough terrain, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 90,
+        "def": 65
+      }
+    },
+    {
+      "id": 23,
+      "name": "Ekans",
+      "types": [
+        "Poison"
+      ],
+      "height": 2.0,
+      "weight": 6.9,
+      "description": "A snake Pokemon from open grasslands, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 35,
+        "atk": 60,
+        "def": 44
+      }
+    },
+    {
+      "id": 24,
+      "name": "Arbok",
+      "types": [
+        "Poison"
+      ],
+      "height": 3.5,
+      "weight": 65.0,
+      "description": "A cobra Pokemon from open grasslands, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 95,
+        "def": 69
+      }
+    },
+    {
+      "id": 25,
+      "name": "Pikachu",
+      "types": [
+        "Electric"
+      ],
+      "height": 0.4,
+      "weight": 6.0,
+      "description": "A mouse Pokemon from deep forests, known for stored electrical energy and electric traits.",
+      "stats": {
+        "hp": 35,
+        "atk": 55,
+        "def": 40
+      }
+    },
+    {
+      "id": 26,
+      "name": "Raichu",
+      "types": [
+        "Electric"
+      ],
+      "height": 0.8,
+      "weight": 30.0,
+      "description": "A mouse Pokemon from deep forests, known for stored electrical energy and electric traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 90,
+        "def": 55
+      }
+    },
+    {
+      "id": 27,
+      "name": "Sandshrew",
+      "types": [
+        "Ground"
+      ],
+      "height": 0.6,
+      "weight": 12.0,
+      "description": "A mouse Pokemon from rough terrain, known for earth-shaking strength and ground traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 75,
+        "def": 85
+      }
+    },
+    {
+      "id": 28,
+      "name": "Sandslash",
+      "types": [
+        "Ground"
+      ],
+      "height": 1.0,
+      "weight": 29.5,
+      "description": "A mouse Pokemon from rough terrain, known for earth-shaking strength and ground traits.",
+      "stats": {
+        "hp": 75,
+        "atk": 100,
+        "def": 110
+      }
+    },
+    {
+      "id": 29,
+      "name": "Nidoran F",
+      "types": [
+        "Poison"
+      ],
+      "height": 0.4,
+      "weight": 7.0,
+      "description": "A poison pin Pokemon from open grasslands, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 47,
+        "def": 52
+      }
+    },
+    {
+      "id": 30,
+      "name": "Nidorina",
+      "types": [
+        "Poison"
+      ],
+      "height": 0.8,
+      "weight": 20.0,
+      "description": "A poison pin Pokemon from open grasslands, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 70,
+        "atk": 62,
+        "def": 67
+      }
+    },
+    {
+      "id": 31,
+      "name": "Nidoqueen",
+      "types": [
+        "Poison",
+        "Ground"
+      ],
+      "height": 1.3,
+      "weight": 60.0,
+      "description": "A drill Pokemon from open grasslands, known for defensive toxins and poison and ground traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 92,
+        "def": 87
+      }
+    },
+    {
+      "id": 32,
+      "name": "Nidoran M",
+      "types": [
+        "Poison"
+      ],
+      "height": 0.5,
+      "weight": 9.0,
+      "description": "A poison pin Pokemon from open grasslands, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 46,
+        "atk": 57,
+        "def": 40
+      }
+    },
+    {
+      "id": 33,
+      "name": "Nidorino",
+      "types": [
+        "Poison"
+      ],
+      "height": 0.9,
+      "weight": 19.5,
+      "description": "A poison pin Pokemon from open grasslands, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 61,
+        "atk": 72,
+        "def": 57
+      }
+    },
+    {
+      "id": 34,
+      "name": "Nidoking",
+      "types": [
+        "Poison",
+        "Ground"
+      ],
+      "height": 1.4,
+      "weight": 62.0,
+      "description": "A drill Pokemon from open grasslands, known for defensive toxins and poison and ground traits.",
+      "stats": {
+        "hp": 81,
+        "atk": 102,
+        "def": 77
+      }
+    },
+    {
+      "id": 35,
+      "name": "Clefairy",
+      "types": [
+        "Fairy"
+      ],
+      "height": 0.6,
+      "weight": 7.5,
+      "description": "A fairy Pokemon from rocky mountains, known for unusual charm and mystery and fairy traits.",
+      "stats": {
+        "hp": 70,
+        "atk": 45,
+        "def": 48
+      }
+    },
+    {
+      "id": 36,
+      "name": "Clefable",
+      "types": [
+        "Fairy"
+      ],
+      "height": 1.3,
+      "weight": 40.0,
+      "description": "A fairy Pokemon from rocky mountains, known for unusual charm and mystery and fairy traits.",
+      "stats": {
+        "hp": 95,
+        "atk": 70,
+        "def": 73
+      }
+    },
+    {
+      "id": 37,
+      "name": "Vulpix",
+      "types": [
+        "Fire"
+      ],
+      "height": 0.6,
+      "weight": 9.9,
+      "description": "A fox Pokemon from open grasslands, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 38,
+        "atk": 41,
+        "def": 40
+      }
+    },
+    {
+      "id": 38,
+      "name": "Ninetales",
+      "types": [
+        "Fire"
+      ],
+      "height": 1.1,
+      "weight": 19.9,
+      "description": "A fox Pokemon from open grasslands, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 73,
+        "atk": 76,
+        "def": 75
+      }
+    },
+    {
+      "id": 39,
+      "name": "Jigglypuff",
+      "types": [
+        "Normal",
+        "Fairy"
+      ],
+      "height": 0.5,
+      "weight": 5.5,
+      "description": "A balloon Pokemon from open grasslands, known for steady, adaptable instincts and normal and fairy traits.",
+      "stats": {
+        "hp": 115,
+        "atk": 45,
+        "def": 20
+      }
+    },
+    {
+      "id": 40,
+      "name": "Wigglytuff",
+      "types": [
+        "Normal",
+        "Fairy"
+      ],
+      "height": 1.0,
+      "weight": 12.0,
+      "description": "A balloon Pokemon from open grasslands, known for steady, adaptable instincts and normal and fairy traits.",
+      "stats": {
+        "hp": 140,
+        "atk": 70,
+        "def": 45
+      }
+    },
+    {
+      "id": 41,
+      "name": "Zubat",
+      "types": [
+        "Poison",
+        "Flying"
+      ],
+      "height": 0.8,
+      "weight": 7.5,
+      "description": "A bat Pokemon from dark caves, known for defensive toxins and poison and flying traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 45,
+        "def": 35
+      }
+    },
+    {
+      "id": 42,
+      "name": "Golbat",
+      "types": [
+        "Poison",
+        "Flying"
+      ],
+      "height": 1.6,
+      "weight": 55.0,
+      "description": "A bat Pokemon from dark caves, known for defensive toxins and poison and flying traits.",
+      "stats": {
+        "hp": 75,
+        "atk": 80,
+        "def": 70
+      }
+    },
+    {
+      "id": 43,
+      "name": "Oddish",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 0.5,
+      "weight": 5.4,
+      "description": "A weed Pokemon from open grasslands, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 45,
+        "atk": 50,
+        "def": 55
+      }
+    },
+    {
+      "id": 44,
+      "name": "Gloom",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 0.8,
+      "weight": 8.6,
+      "description": "A weed Pokemon from open grasslands, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 65,
+        "def": 70
+      }
+    },
+    {
+      "id": 45,
+      "name": "Vileplume",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 1.2,
+      "weight": 18.6,
+      "description": "A flower Pokemon from open grasslands, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 75,
+        "atk": 80,
+        "def": 85
+      }
+    },
+    {
+      "id": 46,
+      "name": "Paras",
+      "types": [
+        "Bug",
+        "Grass"
+      ],
+      "height": 0.3,
+      "weight": 5.4,
+      "description": "A mushroom Pokemon from deep forests, known for quick, adaptive movement and bug and grass traits.",
+      "stats": {
+        "hp": 35,
+        "atk": 70,
+        "def": 55
+      }
+    },
+    {
+      "id": 47,
+      "name": "Parasect",
+      "types": [
+        "Bug",
+        "Grass"
+      ],
+      "height": 1.0,
+      "weight": 29.5,
+      "description": "A mushroom Pokemon from deep forests, known for quick, adaptive movement and bug and grass traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 95,
+        "def": 80
+      }
+    },
+    {
+      "id": 48,
+      "name": "Venonat",
+      "types": [
+        "Bug",
+        "Poison"
+      ],
+      "height": 1.0,
+      "weight": 30.0,
+      "description": "A insect Pokemon from deep forests, known for quick, adaptive movement and bug and poison traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 55,
+        "def": 50
+      }
+    },
+    {
+      "id": 49,
+      "name": "Venomoth",
+      "types": [
+        "Bug",
+        "Poison"
+      ],
+      "height": 1.5,
+      "weight": 12.5,
+      "description": "A poison moth Pokemon from deep forests, known for quick, adaptive movement and bug and poison traits.",
+      "stats": {
+        "hp": 70,
+        "atk": 65,
+        "def": 60
+      }
+    },
+    {
+      "id": 50,
+      "name": "Diglett",
+      "types": [
+        "Ground"
+      ],
+      "height": 0.2,
+      "weight": 0.8,
+      "description": "A mole Pokemon from dark caves, known for earth-shaking strength and ground traits.",
+      "stats": {
+        "hp": 10,
+        "atk": 55,
+        "def": 25
+      }
+    },
+    {
+      "id": 51,
+      "name": "Dugtrio",
+      "types": [
+        "Ground"
+      ],
+      "height": 0.7,
+      "weight": 33.3,
+      "description": "A mole Pokemon from dark caves, known for earth-shaking strength and ground traits.",
+      "stats": {
+        "hp": 35,
+        "atk": 100,
+        "def": 50
+      }
+    },
+    {
+      "id": 52,
+      "name": "Meowth",
+      "types": [
+        "Normal"
+      ],
+      "height": 0.4,
+      "weight": 4.2,
+      "description": "A scratch cat Pokemon from towns and cities, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 45,
+        "def": 35
+      }
+    },
+    {
+      "id": 53,
+      "name": "Persian",
+      "types": [
+        "Normal"
+      ],
+      "height": 1.0,
+      "weight": 32.0,
+      "description": "A classy cat Pokemon from towns and cities, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 70,
+        "def": 60
+      }
+    },
+    {
+      "id": 54,
+      "name": "Psyduck",
+      "types": [
+        "Water"
+      ],
+      "height": 0.8,
+      "weight": 19.6,
+      "description": "A duck Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 52,
+        "def": 48
+      }
+    },
+    {
+      "id": 55,
+      "name": "Golduck",
+      "types": [
+        "Water"
+      ],
+      "height": 1.7,
+      "weight": 76.6,
+      "description": "A duck Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 82,
+        "def": 78
+      }
+    },
+    {
+      "id": 56,
+      "name": "Mankey",
+      "types": [
+        "Fighting"
+      ],
+      "height": 0.5,
+      "weight": 28.0,
+      "description": "A pig monkey Pokemon from rocky mountains, known for close-range fighting skill and fighting traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 80,
+        "def": 35
+      }
+    },
+    {
+      "id": 57,
+      "name": "Primeape",
+      "types": [
+        "Fighting"
+      ],
+      "height": 1.0,
+      "weight": 32.0,
+      "description": "A pig monkey Pokemon from rocky mountains, known for close-range fighting skill and fighting traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 105,
+        "def": 60
+      }
+    },
+    {
+      "id": 58,
+      "name": "Growlithe",
+      "types": [
+        "Fire"
+      ],
+      "height": 0.7,
+      "weight": 19.0,
+      "description": "A puppy Pokemon from open grasslands, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 70,
+        "def": 45
+      }
+    },
+    {
+      "id": 59,
+      "name": "Arcanine",
+      "types": [
+        "Fire"
+      ],
+      "height": 1.9,
+      "weight": 155.0,
+      "description": "A legendary Pokemon from open grasslands, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 110,
+        "def": 80
+      }
+    },
+    {
+      "id": 60,
+      "name": "Poliwag",
+      "types": [
+        "Water"
+      ],
+      "height": 0.6,
+      "weight": 12.4,
+      "description": "A tadpole Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 50,
+        "def": 40
+      }
+    },
+    {
+      "id": 61,
+      "name": "Poliwhirl",
+      "types": [
+        "Water"
+      ],
+      "height": 1.0,
+      "weight": 20.0,
+      "description": "A tadpole Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 65,
+        "def": 65
+      }
+    },
+    {
+      "id": 62,
+      "name": "Poliwrath",
+      "types": [
+        "Water",
+        "Fighting"
+      ],
+      "height": 1.3,
+      "weight": 54.0,
+      "description": "A tadpole Pokemon from the water edge, known for strong aquatic instincts and water and fighting traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 95,
+        "def": 95
+      }
+    },
+    {
+      "id": 63,
+      "name": "Abra",
+      "types": [
+        "Psychic"
+      ],
+      "height": 0.9,
+      "weight": 19.5,
+      "description": "A psi Pokemon from towns and cities, known for focused mental power and psychic traits.",
+      "stats": {
+        "hp": 25,
+        "atk": 20,
+        "def": 15
+      }
+    },
+    {
+      "id": 64,
+      "name": "Kadabra",
+      "types": [
+        "Psychic"
+      ],
+      "height": 1.3,
+      "weight": 56.5,
+      "description": "A psi Pokemon from towns and cities, known for focused mental power and psychic traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 35,
+        "def": 30
+      }
+    },
+    {
+      "id": 65,
+      "name": "Alakazam",
+      "types": [
+        "Psychic"
+      ],
+      "height": 1.5,
+      "weight": 48.0,
+      "description": "A psi Pokemon from towns and cities, known for focused mental power and psychic traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 50,
+        "def": 45
+      }
+    },
+    {
+      "id": 66,
+      "name": "Machop",
+      "types": [
+        "Fighting"
+      ],
+      "height": 0.8,
+      "weight": 19.5,
+      "description": "A superpower Pokemon from rocky mountains, known for close-range fighting skill and fighting traits.",
+      "stats": {
+        "hp": 70,
+        "atk": 80,
+        "def": 50
+      }
+    },
+    {
+      "id": 67,
+      "name": "Machoke",
+      "types": [
+        "Fighting"
+      ],
+      "height": 1.5,
+      "weight": 70.5,
+      "description": "A superpower Pokemon from rocky mountains, known for close-range fighting skill and fighting traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 100,
+        "def": 70
+      }
+    },
+    {
+      "id": 68,
+      "name": "Machamp",
+      "types": [
+        "Fighting"
+      ],
+      "height": 1.6,
+      "weight": 130.0,
+      "description": "A superpower Pokemon from rocky mountains, known for close-range fighting skill and fighting traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 130,
+        "def": 80
+      }
+    },
+    {
+      "id": 69,
+      "name": "Bellsprout",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 0.7,
+      "weight": 4.0,
+      "description": "A flower Pokemon from deep forests, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 75,
+        "def": 35
+      }
+    },
+    {
+      "id": 70,
+      "name": "Weepinbell",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 1.0,
+      "weight": 6.4,
+      "description": "A flycatcher Pokemon from deep forests, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 90,
+        "def": 50
+      }
+    },
+    {
+      "id": 71,
+      "name": "Victreebel",
+      "types": [
+        "Grass",
+        "Poison"
+      ],
+      "height": 1.7,
+      "weight": 15.5,
+      "description": "A flycatcher Pokemon from deep forests, known for plant-like vitality and grass and poison traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 105,
+        "def": 65
+      }
+    },
+    {
+      "id": 72,
+      "name": "Tentacool",
+      "types": [
+        "Water",
+        "Poison"
+      ],
+      "height": 0.9,
+      "weight": 45.5,
+      "description": "A jellyfish Pokemon from the sea, known for strong aquatic instincts and water and poison traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 40,
+        "def": 35
+      }
+    },
+    {
+      "id": 73,
+      "name": "Tentacruel",
+      "types": [
+        "Water",
+        "Poison"
+      ],
+      "height": 1.6,
+      "weight": 55.0,
+      "description": "A jellyfish Pokemon from the sea, known for strong aquatic instincts and water and poison traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 70,
+        "def": 65
+      }
+    },
+    {
+      "id": 74,
+      "name": "Geodude",
+      "types": [
+        "Rock",
+        "Ground"
+      ],
+      "height": 0.4,
+      "weight": 20.0,
+      "description": "A rock Pokemon from rocky mountains, known for rugged natural armor and rock and ground traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 80,
+        "def": 100
+      }
+    },
+    {
+      "id": 75,
+      "name": "Graveler",
+      "types": [
+        "Rock",
+        "Ground"
+      ],
+      "height": 1.0,
+      "weight": 105.0,
+      "description": "A rock Pokemon from rocky mountains, known for rugged natural armor and rock and ground traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 95,
+        "def": 115
+      }
+    },
+    {
+      "id": 76,
+      "name": "Golem",
+      "types": [
+        "Rock",
+        "Ground"
+      ],
+      "height": 1.4,
+      "weight": 300.0,
+      "description": "A megaton Pokemon from rocky mountains, known for rugged natural armor and rock and ground traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 120,
+        "def": 130
+      }
+    },
+    {
+      "id": 77,
+      "name": "Ponyta",
+      "types": [
+        "Fire"
+      ],
+      "height": 1.0,
+      "weight": 30.0,
+      "description": "A fire horse Pokemon from open grasslands, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 85,
+        "def": 55
+      }
+    },
+    {
+      "id": 78,
+      "name": "Rapidash",
+      "types": [
+        "Fire"
+      ],
+      "height": 1.7,
+      "weight": 95.0,
+      "description": "A fire horse Pokemon from open grasslands, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 100,
+        "def": 70
+      }
+    },
+    {
+      "id": 79,
+      "name": "Slowpoke",
+      "types": [
+        "Water",
+        "Psychic"
+      ],
+      "height": 1.2,
+      "weight": 36.0,
+      "description": "A dopey Pokemon from the water edge, known for strong aquatic instincts and water and psychic traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 65,
+        "def": 65
+      }
+    },
+    {
+      "id": 80,
+      "name": "Slowbro",
+      "types": [
+        "Water",
+        "Psychic"
+      ],
+      "height": 1.6,
+      "weight": 78.5,
+      "description": "A hermit crab Pokemon from the water edge, known for strong aquatic instincts and water and psychic traits.",
+      "stats": {
+        "hp": 95,
+        "atk": 75,
+        "def": 110
+      }
+    },
+    {
+      "id": 81,
+      "name": "Magnemite",
+      "types": [
+        "Electric",
+        "Steel"
+      ],
+      "height": 0.3,
+      "weight": 6.0,
+      "description": "A magnet Pokemon from rough terrain, known for stored electrical energy and electric and steel traits.",
+      "stats": {
+        "hp": 25,
+        "atk": 35,
+        "def": 70
+      }
+    },
+    {
+      "id": 82,
+      "name": "Magneton",
+      "types": [
+        "Electric",
+        "Steel"
+      ],
+      "height": 1.0,
+      "weight": 60.0,
+      "description": "A magnet Pokemon from rough terrain, known for stored electrical energy and electric and steel traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 60,
+        "def": 95
+      }
+    },
+    {
+      "id": 83,
+      "name": "Farfetchd",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 0.8,
+      "weight": 15.0,
+      "description": "A wild duck Pokemon from open grasslands, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 52,
+        "atk": 90,
+        "def": 55
+      }
+    },
+    {
+      "id": 84,
+      "name": "Doduo",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 1.4,
+      "weight": 39.2,
+      "description": "A twin bird Pokemon from open grasslands, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 35,
+        "atk": 85,
+        "def": 45
+      }
+    },
+    {
+      "id": 85,
+      "name": "Dodrio",
+      "types": [
+        "Normal",
+        "Flying"
+      ],
+      "height": 1.8,
+      "weight": 85.2,
+      "description": "A triple bird Pokemon from open grasslands, known for steady, adaptable instincts and normal and flying traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 110,
+        "def": 70
+      }
+    },
+    {
+      "id": 86,
+      "name": "Seel",
+      "types": [
+        "Water"
+      ],
+      "height": 1.1,
+      "weight": 90.0,
+      "description": "A sea lion Pokemon from the sea, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 45,
+        "def": 55
+      }
+    },
+    {
+      "id": 87,
+      "name": "Dewgong",
+      "types": [
+        "Water",
+        "Ice"
+      ],
+      "height": 1.7,
+      "weight": 120.0,
+      "description": "A sea lion Pokemon from the sea, known for strong aquatic instincts and water and ice traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 70,
+        "def": 80
+      }
+    },
+    {
+      "id": 88,
+      "name": "Grimer",
+      "types": [
+        "Poison"
+      ],
+      "height": 0.9,
+      "weight": 30.0,
+      "description": "A sludge Pokemon from towns and cities, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 80,
+        "def": 50
+      }
+    },
+    {
+      "id": 89,
+      "name": "Muk",
+      "types": [
+        "Poison"
+      ],
+      "height": 1.2,
+      "weight": 30.0,
+      "description": "A sludge Pokemon from towns and cities, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 105,
+        "atk": 105,
+        "def": 75
+      }
+    },
+    {
+      "id": 90,
+      "name": "Shellder",
+      "types": [
+        "Water"
+      ],
+      "height": 0.3,
+      "weight": 4.0,
+      "description": "A bivalve Pokemon from the sea, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 30,
+        "atk": 65,
+        "def": 100
+      }
+    },
+    {
+      "id": 91,
+      "name": "Cloyster",
+      "types": [
+        "Water",
+        "Ice"
+      ],
+      "height": 1.5,
+      "weight": 132.5,
+      "description": "A bivalve Pokemon from the sea, known for strong aquatic instincts and water and ice traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 95,
+        "def": 180
+      }
+    },
+    {
+      "id": 92,
+      "name": "Gastly",
+      "types": [
+        "Ghost",
+        "Poison"
+      ],
+      "height": 1.3,
+      "weight": 0.1,
+      "description": "A gas Pokemon from dark caves, known for strange spectral behavior and ghost and poison traits.",
+      "stats": {
+        "hp": 30,
+        "atk": 35,
+        "def": 30
+      }
+    },
+    {
+      "id": 93,
+      "name": "Haunter",
+      "types": [
+        "Ghost",
+        "Poison"
+      ],
+      "height": 1.6,
+      "weight": 0.1,
+      "description": "A gas Pokemon from dark caves, known for strange spectral behavior and ghost and poison traits.",
+      "stats": {
+        "hp": 45,
+        "atk": 50,
+        "def": 45
+      }
+    },
+    {
+      "id": 94,
+      "name": "Gengar",
+      "types": [
+        "Ghost",
+        "Poison"
+      ],
+      "height": 1.5,
+      "weight": 40.5,
+      "description": "A shadow Pokemon from dark caves, known for strange spectral behavior and ghost and poison traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 65,
+        "def": 60
+      }
+    },
+    {
+      "id": 95,
+      "name": "Onix",
+      "types": [
+        "Rock",
+        "Ground"
+      ],
+      "height": 8.8,
+      "weight": 210.0,
+      "description": "A rock snake Pokemon from dark caves, known for rugged natural armor and rock and ground traits.",
+      "stats": {
+        "hp": 35,
+        "atk": 45,
+        "def": 160
+      }
+    },
+    {
+      "id": 96,
+      "name": "Drowzee",
+      "types": [
+        "Psychic"
+      ],
+      "height": 1.0,
+      "weight": 32.4,
+      "description": "A hypnosis Pokemon from open grasslands, known for focused mental power and psychic traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 48,
+        "def": 45
+      }
+    },
+    {
+      "id": 97,
+      "name": "Hypno",
+      "types": [
+        "Psychic"
+      ],
+      "height": 1.6,
+      "weight": 75.6,
+      "description": "A hypnosis Pokemon from open grasslands, known for focused mental power and psychic traits.",
+      "stats": {
+        "hp": 85,
+        "atk": 73,
+        "def": 70
+      }
+    },
+    {
+      "id": 98,
+      "name": "Krabby",
+      "types": [
+        "Water"
+      ],
+      "height": 0.4,
+      "weight": 6.5,
+      "description": "A river crab Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 30,
+        "atk": 105,
+        "def": 90
+      }
+    },
+    {
+      "id": 99,
+      "name": "Kingler",
+      "types": [
+        "Water"
+      ],
+      "height": 1.3,
+      "weight": 60.0,
+      "description": "A pincer Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 130,
+        "def": 115
+      }
+    },
+    {
+      "id": 100,
+      "name": "Voltorb",
+      "types": [
+        "Electric"
+      ],
+      "height": 0.5,
+      "weight": 10.4,
+      "description": "A ball Pokemon from towns and cities, known for stored electrical energy and electric traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 30,
+        "def": 50
+      }
+    },
+    {
+      "id": 101,
+      "name": "Electrode",
+      "types": [
+        "Electric"
+      ],
+      "height": 1.2,
+      "weight": 66.6,
+      "description": "A ball Pokemon from towns and cities, known for stored electrical energy and electric traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 50,
+        "def": 70
+      }
+    },
+    {
+      "id": 102,
+      "name": "Exeggcute",
+      "types": [
+        "Grass",
+        "Psychic"
+      ],
+      "height": 0.4,
+      "weight": 2.5,
+      "description": "A egg Pokemon from deep forests, known for plant-like vitality and grass and psychic traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 40,
+        "def": 80
+      }
+    },
+    {
+      "id": 103,
+      "name": "Exeggutor",
+      "types": [
+        "Grass",
+        "Psychic"
+      ],
+      "height": 2.0,
+      "weight": 120.0,
+      "description": "A coconut Pokemon from deep forests, known for plant-like vitality and grass and psychic traits.",
+      "stats": {
+        "hp": 95,
+        "atk": 95,
+        "def": 85
+      }
+    },
+    {
+      "id": 104,
+      "name": "Cubone",
+      "types": [
+        "Ground"
+      ],
+      "height": 0.4,
+      "weight": 6.5,
+      "description": "A lonely Pokemon from rocky mountains, known for earth-shaking strength and ground traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 50,
+        "def": 95
+      }
+    },
+    {
+      "id": 105,
+      "name": "Marowak",
+      "types": [
+        "Ground"
+      ],
+      "height": 1.0,
+      "weight": 45.0,
+      "description": "A bone keeper Pokemon from rocky mountains, known for earth-shaking strength and ground traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 80,
+        "def": 110
+      }
+    },
+    {
+      "id": 106,
+      "name": "Hitmonlee",
+      "types": [
+        "Fighting"
+      ],
+      "height": 1.5,
+      "weight": 49.8,
+      "description": "A kicking Pokemon from towns and cities, known for close-range fighting skill and fighting traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 120,
+        "def": 53
+      }
+    },
+    {
+      "id": 107,
+      "name": "Hitmonchan",
+      "types": [
+        "Fighting"
+      ],
+      "height": 1.4,
+      "weight": 50.2,
+      "description": "A punching Pokemon from towns and cities, known for close-range fighting skill and fighting traits.",
+      "stats": {
+        "hp": 50,
+        "atk": 105,
+        "def": 79
+      }
+    },
+    {
+      "id": 108,
+      "name": "Lickitung",
+      "types": [
+        "Normal"
+      ],
+      "height": 1.2,
+      "weight": 65.5,
+      "description": "A licking Pokemon from open grasslands, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 55,
+        "def": 75
+      }
+    },
+    {
+      "id": 109,
+      "name": "Koffing",
+      "types": [
+        "Poison"
+      ],
+      "height": 0.6,
+      "weight": 1.0,
+      "description": "A poison gas Pokemon from towns and cities, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 65,
+        "def": 95
+      }
+    },
+    {
+      "id": 110,
+      "name": "Weezing",
+      "types": [
+        "Poison"
+      ],
+      "height": 1.2,
+      "weight": 9.5,
+      "description": "A poison gas Pokemon from towns and cities, known for defensive toxins and poison traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 90,
+        "def": 120
+      }
+    },
+    {
+      "id": 111,
+      "name": "Rhyhorn",
+      "types": [
+        "Ground",
+        "Rock"
+      ],
+      "height": 1.0,
+      "weight": 115.0,
+      "description": "A spikes Pokemon from rough terrain, known for earth-shaking strength and ground and rock traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 85,
+        "def": 95
+      }
+    },
+    {
+      "id": 112,
+      "name": "Rhydon",
+      "types": [
+        "Ground",
+        "Rock"
+      ],
+      "height": 1.9,
+      "weight": 120.0,
+      "description": "A drill Pokemon from rough terrain, known for earth-shaking strength and ground and rock traits.",
+      "stats": {
+        "hp": 105,
+        "atk": 130,
+        "def": 120
+      }
+    },
+    {
+      "id": 113,
+      "name": "Chansey",
+      "types": [
+        "Normal"
+      ],
+      "height": 1.1,
+      "weight": 34.6,
+      "description": "A egg Pokemon from towns and cities, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 250,
+        "atk": 5,
+        "def": 5
+      }
+    },
+    {
+      "id": 114,
+      "name": "Tangela",
+      "types": [
+        "Grass"
+      ],
+      "height": 1.0,
+      "weight": 35.0,
+      "description": "A vine Pokemon from open grasslands, known for plant-like vitality and grass traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 55,
+        "def": 115
+      }
+    },
+    {
+      "id": 115,
+      "name": "Kangaskhan",
+      "types": [
+        "Normal"
+      ],
+      "height": 2.2,
+      "weight": 80.0,
+      "description": "A parent Pokemon from open grasslands, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 105,
+        "atk": 95,
+        "def": 80
+      }
+    },
+    {
+      "id": 116,
+      "name": "Horsea",
+      "types": [
+        "Water"
+      ],
+      "height": 0.4,
+      "weight": 8.0,
+      "description": "A dragon Pokemon from the sea, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 30,
+        "atk": 40,
+        "def": 70
+      }
+    },
+    {
+      "id": 117,
+      "name": "Seadra",
+      "types": [
+        "Water"
+      ],
+      "height": 1.2,
+      "weight": 25.0,
+      "description": "A dragon Pokemon from the sea, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 65,
+        "def": 95
+      }
+    },
+    {
+      "id": 118,
+      "name": "Goldeen",
+      "types": [
+        "Water"
+      ],
+      "height": 0.6,
+      "weight": 15.0,
+      "description": "A goldfish Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 45,
+        "atk": 67,
+        "def": 60
+      }
+    },
+    {
+      "id": 119,
+      "name": "Seaking",
+      "types": [
+        "Water"
+      ],
+      "height": 1.3,
+      "weight": 39.0,
+      "description": "A goldfish Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 92,
+        "def": 65
+      }
+    },
+    {
+      "id": 120,
+      "name": "Staryu",
+      "types": [
+        "Water"
+      ],
+      "height": 0.8,
+      "weight": 34.5,
+      "description": "A star shape Pokemon from the sea, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 30,
+        "atk": 45,
+        "def": 55
+      }
+    },
+    {
+      "id": 121,
+      "name": "Starmie",
+      "types": [
+        "Water",
+        "Psychic"
+      ],
+      "height": 1.1,
+      "weight": 80.0,
+      "description": "A mysterious Pokemon from the sea, known for strong aquatic instincts and water and psychic traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 75,
+        "def": 85
+      }
+    },
+    {
+      "id": 122,
+      "name": "Mr Mime",
+      "types": [
+        "Psychic",
+        "Fairy"
+      ],
+      "height": 1.3,
+      "weight": 54.5,
+      "description": "A barrier Pokemon from towns and cities, known for focused mental power and psychic and fairy traits.",
+      "stats": {
+        "hp": 40,
+        "atk": 45,
+        "def": 65
+      }
+    },
+    {
+      "id": 123,
+      "name": "Scyther",
+      "types": [
+        "Bug",
+        "Flying"
+      ],
+      "height": 1.5,
+      "weight": 56.0,
+      "description": "A mantis Pokemon from open grasslands, known for quick, adaptive movement and bug and flying traits.",
+      "stats": {
+        "hp": 70,
+        "atk": 110,
+        "def": 80
+      }
+    },
+    {
+      "id": 124,
+      "name": "Jynx",
+      "types": [
+        "Ice",
+        "Psychic"
+      ],
+      "height": 1.4,
+      "weight": 40.6,
+      "description": "A human shape Pokemon from towns and cities, known for cold-resistant power and ice and psychic traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 50,
+        "def": 35
+      }
+    },
+    {
+      "id": 125,
+      "name": "Electabuzz",
+      "types": [
+        "Electric"
+      ],
+      "height": 1.1,
+      "weight": 30.0,
+      "description": "A electric Pokemon from open grasslands, known for stored electrical energy and electric traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 83,
+        "def": 57
+      }
+    },
+    {
+      "id": 126,
+      "name": "Magmar",
+      "types": [
+        "Fire"
+      ],
+      "height": 1.3,
+      "weight": 44.5,
+      "description": "A spitfire Pokemon from rocky mountains, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 95,
+        "def": 57
+      }
+    },
+    {
+      "id": 127,
+      "name": "Pinsir",
+      "types": [
+        "Bug"
+      ],
+      "height": 1.5,
+      "weight": 55.0,
+      "description": "A stag beetle Pokemon from deep forests, known for quick, adaptive movement and bug traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 125,
+        "def": 100
+      }
+    },
+    {
+      "id": 128,
+      "name": "Tauros",
+      "types": [
+        "Normal"
+      ],
+      "height": 1.4,
+      "weight": 88.4,
+      "description": "A wild bull Pokemon from open grasslands, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 75,
+        "atk": 100,
+        "def": 95
+      }
+    },
+    {
+      "id": 129,
+      "name": "Magikarp",
+      "types": [
+        "Water"
+      ],
+      "height": 0.9,
+      "weight": 10.0,
+      "description": "A fish Pokemon from the water edge, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 20,
+        "atk": 10,
+        "def": 55
+      }
+    },
+    {
+      "id": 130,
+      "name": "Gyarados",
+      "types": [
+        "Water",
+        "Flying"
+      ],
+      "height": 6.5,
+      "weight": 235.0,
+      "description": "A atrocious Pokemon from the water edge, known for strong aquatic instincts and water and flying traits.",
+      "stats": {
+        "hp": 95,
+        "atk": 125,
+        "def": 79
+      }
+    },
+    {
+      "id": 131,
+      "name": "Lapras",
+      "types": [
+        "Water",
+        "Ice"
+      ],
+      "height": 2.5,
+      "weight": 220.0,
+      "description": "A transport Pokemon from the sea, known for strong aquatic instincts and water and ice traits.",
+      "stats": {
+        "hp": 130,
+        "atk": 85,
+        "def": 80
+      }
+    },
+    {
+      "id": 132,
+      "name": "Ditto",
+      "types": [
+        "Normal"
+      ],
+      "height": 0.3,
+      "weight": 4.0,
+      "description": "A transform Pokemon from towns and cities, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 48,
+        "atk": 48,
+        "def": 48
+      }
+    },
+    {
+      "id": 133,
+      "name": "Eevee",
+      "types": [
+        "Normal"
+      ],
+      "height": 0.3,
+      "weight": 6.5,
+      "description": "A evolution Pokemon from towns and cities, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 55,
+        "atk": 55,
+        "def": 50
+      }
+    },
+    {
+      "id": 134,
+      "name": "Vaporeon",
+      "types": [
+        "Water"
+      ],
+      "height": 1.0,
+      "weight": 29.0,
+      "description": "A bubble jet Pokemon from towns and cities, known for strong aquatic instincts and water traits.",
+      "stats": {
+        "hp": 130,
+        "atk": 65,
+        "def": 60
+      }
+    },
+    {
+      "id": 135,
+      "name": "Jolteon",
+      "types": [
+        "Electric"
+      ],
+      "height": 0.8,
+      "weight": 24.5,
+      "description": "A lightning Pokemon from towns and cities, known for stored electrical energy and electric traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 65,
+        "def": 60
+      }
+    },
+    {
+      "id": 136,
+      "name": "Flareon",
+      "types": [
+        "Fire"
+      ],
+      "height": 0.9,
+      "weight": 25.0,
+      "description": "A flame Pokemon from towns and cities, known for intense body heat and fire traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 130,
+        "def": 60
+      }
+    },
+    {
+      "id": 137,
+      "name": "Porygon",
+      "types": [
+        "Normal"
+      ],
+      "height": 0.8,
+      "weight": 36.5,
+      "description": "A virtual Pokemon from towns and cities, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 65,
+        "atk": 60,
+        "def": 70
+      }
+    },
+    {
+      "id": 138,
+      "name": "Omanyte",
+      "types": [
+        "Rock",
+        "Water"
+      ],
+      "height": 0.4,
+      "weight": 7.5,
+      "description": "A spiral Pokemon from the sea, known for rugged natural armor and rock and water traits.",
+      "stats": {
+        "hp": 35,
+        "atk": 40,
+        "def": 100
+      }
+    },
+    {
+      "id": 139,
+      "name": "Omastar",
+      "types": [
+        "Rock",
+        "Water"
+      ],
+      "height": 1.0,
+      "weight": 35.0,
+      "description": "A spiral Pokemon from the sea, known for rugged natural armor and rock and water traits.",
+      "stats": {
+        "hp": 70,
+        "atk": 60,
+        "def": 125
+      }
+    },
+    {
+      "id": 140,
+      "name": "Kabuto",
+      "types": [
+        "Rock",
+        "Water"
+      ],
+      "height": 0.5,
+      "weight": 11.5,
+      "description": "A shellfish Pokemon from the sea, known for rugged natural armor and rock and water traits.",
+      "stats": {
+        "hp": 30,
+        "atk": 80,
+        "def": 90
+      }
+    },
+    {
+      "id": 141,
+      "name": "Kabutops",
+      "types": [
+        "Rock",
+        "Water"
+      ],
+      "height": 1.3,
+      "weight": 40.5,
+      "description": "A shellfish Pokemon from the sea, known for rugged natural armor and rock and water traits.",
+      "stats": {
+        "hp": 60,
+        "atk": 115,
+        "def": 105
+      }
+    },
+    {
+      "id": 142,
+      "name": "Aerodactyl",
+      "types": [
+        "Rock",
+        "Flying"
+      ],
+      "height": 1.8,
+      "weight": 59.0,
+      "description": "A fossil Pokemon from rocky mountains, known for rugged natural armor and rock and flying traits.",
+      "stats": {
+        "hp": 80,
+        "atk": 105,
+        "def": 65
+      }
+    },
+    {
+      "id": 143,
+      "name": "Snorlax",
+      "types": [
+        "Normal"
+      ],
+      "height": 2.1,
+      "weight": 460.0,
+      "description": "A sleeping Pokemon from rocky mountains, known for steady, adaptable instincts and normal traits.",
+      "stats": {
+        "hp": 160,
+        "atk": 110,
+        "def": 65
+      }
+    },
+    {
+      "id": 144,
+      "name": "Articuno",
+      "types": [
+        "Ice",
+        "Flying"
+      ],
+      "height": 1.7,
+      "weight": 55.4,
+      "description": "A freeze Pokemon from rarely explored places, known for cold-resistant power and ice and flying traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 85,
+        "def": 100
+      }
+    },
+    {
+      "id": 145,
+      "name": "Zapdos",
+      "types": [
+        "Electric",
+        "Flying"
+      ],
+      "height": 1.6,
+      "weight": 52.6,
+      "description": "A electric Pokemon from rarely explored places, known for stored electrical energy and electric and flying traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 90,
+        "def": 85
+      }
+    },
+    {
+      "id": 146,
+      "name": "Moltres",
+      "types": [
+        "Fire",
+        "Flying"
+      ],
+      "height": 2.0,
+      "weight": 60.0,
+      "description": "A flame Pokemon from rarely explored places, known for intense body heat and fire and flying traits.",
+      "stats": {
+        "hp": 90,
+        "atk": 100,
+        "def": 90
+      }
+    },
+    {
+      "id": 147,
+      "name": "Dratini",
+      "types": [
+        "Dragon"
+      ],
+      "height": 1.8,
+      "weight": 3.3,
+      "description": "A dragon Pokemon from the water edge, known for rare draconic power and dragon traits.",
+      "stats": {
+        "hp": 41,
+        "atk": 64,
+        "def": 45
+      }
+    },
+    {
+      "id": 148,
+      "name": "Dragonair",
+      "types": [
+        "Dragon"
+      ],
+      "height": 4.0,
+      "weight": 16.5,
+      "description": "A dragon Pokemon from the water edge, known for rare draconic power and dragon traits.",
+      "stats": {
+        "hp": 61,
+        "atk": 84,
+        "def": 65
+      }
+    },
+    {
+      "id": 149,
+      "name": "Dragonite",
+      "types": [
+        "Dragon",
+        "Flying"
+      ],
+      "height": 2.2,
+      "weight": 210.0,
+      "description": "A dragon Pokemon from the water edge, known for rare draconic power and dragon and flying traits.",
+      "stats": {
+        "hp": 91,
+        "atk": 134,
+        "def": 95
+      }
+    },
+    {
+      "id": 150,
+      "name": "Mewtwo",
+      "types": [
+        "Psychic"
+      ],
+      "height": 2.0,
+      "weight": 122.0,
+      "description": "A genetic Pokemon from rarely explored places, known for focused mental power and psychic traits.",
+      "stats": {
+        "hp": 106,
+        "atk": 110,
+        "def": 90
+      }
+    },
+    {
+      "id": 151,
+      "name": "Mew",
+      "types": [
+        "Psychic"
+      ],
+      "height": 0.4,
+      "weight": 4.0,
+      "description": "A new species Pokemon from rarely explored places, known for focused mental power and psychic traits.",
+      "stats": {
+        "hp": 100,
+        "atk": 100,
+        "def": 100
+      }
+    }
+  ]
+}

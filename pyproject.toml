@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pokedex"
+version = "0.1.0"
+description = "A pygame Pokédex app for Raspberry Pi Zero and macOS development."
+requires-python = ">=3.10"
+dependencies = ["pygame>=2.5"]
+
+[project.scripts]
+pokedex = "pokedex.main:main"
+
+[tool.setuptools]
+packages = ["pokedex", "pokedex.screens"]
+
+[tool.setuptools.package-dir]
+pokedex = "."
+"pokedex.screens" = "screens"
+
+[tool.setuptools.package-data]
+pokedex = ["data/*.json"]
