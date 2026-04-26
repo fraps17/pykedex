@@ -53,13 +53,11 @@ class TFTDisplay:
             "rst": "GPIO25",
             "backlight": "GPIO18",
             "rotation": 90,
-            "offset_left": 0,
-            "offset_top": 0,
             "invert": True,
             "bgr": True,
             "spi_speed_hz": 4000000,
-            "width": config.width,
-            "height": config.height,
+            "width": config.height,
+            "height": config.width,
         }
         try:
             self.disp = ST7735.ST7735(**kwargs)
