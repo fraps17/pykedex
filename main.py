@@ -1,24 +1,25 @@
 from __future__ import annotations
 
-import argparse
+import pygame
 
-from .config import Config
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the Pokédex pygame app.")
-    parser.add_argument("--fullscreen", action="store_true", help="start in fullscreen Raspberry Pi mode")
-    parser.add_argument("--scale", type=int, default=4, help="development window scale")
-    return parser.parse_args()
+try:
+    from . import display
+except ImportError:
+    import display
 
 
 def main() -> None:
-    args = parse_args()
-    config = Config(fullscreen=args.fullscreen, scale=args.scale)
+    pygame.init()
+    clock = pygame.time.Clock()
+    surface = pygame.Surface((display.WIDTH, display.HEIGHT))
 
-    from .app import PokedexApp
-
-    PokedexApp(config).run()
+    try:
+        while True:
+            surface.fill((0, 180, 80))
+            display.render(surface)
+            clock.tick(30)
+    finally:
+        pygame.quit()
 
 
 if __name__ == "__main__":
