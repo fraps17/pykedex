@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import time
-
 from PIL import Image, ImageDraw, ImageOps
 
 try:
@@ -124,16 +122,18 @@ def main() -> None:
         ("thick grid", grid()),
     ]
 
+    index = 0
     while True:
-        for name, image in tests:
-            print(f"showing corrected {name}")
-            transformed = transform(
-                image,
-                swap_red_blue=True,
-                invert_colors=True,
-            )
-            show_raw(display, transformed)
-            time.sleep(2)
+        name, image = tests[index]
+        print(f"showing corrected {name}")
+        transformed = transform(
+            image,
+            swap_red_blue=True,
+            invert_colors=True,
+        )
+        show_raw(display, transformed)
+        input("press Enter for next test...")
+        index = (index + 1) % len(tests)
 
 
 if __name__ == "__main__":
