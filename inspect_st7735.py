@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import inspect
 
-import ST7735
+try:
+    import st7735 as ST7735
+except ImportError:
+    import ST7735
 
 from display import DisplayConfig, TFTDisplay
 

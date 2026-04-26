@@ -40,7 +40,10 @@ class DisplayConfig:
 
 class TFTDisplay:
     def __init__(self, config: DisplayConfig) -> None:
-        import ST7735
+        try:
+            import st7735 as ST7735
+        except ImportError:
+            import ST7735
 
         self.config = config
         kwargs = {
@@ -50,6 +53,10 @@ class TFTDisplay:
             "rst": "GPIO25",
             "backlight": "GPIO18",
             "rotation": 90,
+            "offset_left": 0,
+            "offset_top": 0,
+            "invert": True,
+            "bgr": True,
             "spi_speed_hz": 4000000,
             "width": config.width,
             "height": config.height,
