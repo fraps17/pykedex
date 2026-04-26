@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image, ImageDraw
 
 try:
     from .display import DisplayConfig, TFTDisplay
@@ -93,30 +93,14 @@ def center_blocks(size: tuple[int, int]) -> Image.Image:
     return image
 
 
-def transform(image: Image.Image, *, swap_red_blue: bool, invert_colors: bool) -> Image.Image:
-    if image.mode != "RGB":
-        image = image.convert("RGB")
-    if swap_red_blue:
-        red, green, blue = image.split()
-        image = Image.merge("RGB", (blue, green, red))
-    if invert_colors:
-        image = ImageOps.invert(image)
-    return image
-
-
-def show_raw(display: TFTDisplay, image: Image.Image) -> None:
-    print("sending image size", image.size)
-    display.disp.display(image.convert("RGB"))
-
-
 def main() -> None:
     display = TFTDisplay(
         DisplayConfig(
             width=160,
             height=128,
             scale=1,
-            swap_red_blue=False,
-            invert_colors=False,
+            swap_red_blue=True,
+            invert_colors=True,
         )
     )
     size = (
@@ -141,13 +125,9 @@ def main() -> None:
     index = 0
     while True:
         name, image = tests[index]
-        print(f"showing corrected {name} at {size[0]}x{size[1]}")
-        transformed = transform(
-            image,
-            swap_red_blue=True,
-            invert_colors=True,
-        )
-        show_raw(display, transformed)
+        print(f"showing {name} at {size[0]}x{size[1]}")
+        print("source image size", image.size)
+        display.render(image)
         input("press Enter for next test...")
         index = (index + 1) % len(tests)
 

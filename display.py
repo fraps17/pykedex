@@ -72,6 +72,12 @@ class TFTDisplay:
     def render(self, image: Image.Image) -> None:
         if image.mode != "RGB":
             image = image.convert("RGB")
+        driver_size = (
+            int(getattr(self.disp, "width", image.width)),
+            int(getattr(self.disp, "height", image.height)),
+        )
+        if image.size != driver_size:
+            image = image.resize(driver_size, Image.Resampling.NEAREST)
         if self.config.swap_red_blue:
             red, green, blue = image.split()
             image = Image.merge("RGB", (blue, green, red))
