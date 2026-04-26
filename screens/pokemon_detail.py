@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-import pygame
+from PIL import Image, ImageDraw
 
-from ..input import Button, InputEvent
-from .base import Palette, draw_content, font
+try:
+    from ..input import Button
+except ImportError:
+    from input import Button
+from .base import Palette, draw_header, draw_text_lines, font
 
 
 SECTIONS = ("INFO", "STATS")
@@ -16,66 +19,63 @@ class PokemonDetailScreen:
         self.selected = selected
         self.section = 0
 
-    def handle_event(self, event: InputEvent) -> str | None:
-        if event.button == Button.LEFT:
+    def handle_button(self, button: Button) -> str | None:
+        if button == Button.LEFT:
             self.section = (self.section - 1) % len(SECTIONS)
-        elif event.button == Button.RIGHT:
+        elif button == Button.RIGHT:
             self.section = (self.section + 1) % len(SECTIONS)
-        elif event.button == Button.UP:
+        elif button == Button.UP:
             self.selected = (self.selected - 1) % len(self.pokemon)
-        elif event.button == Button.DOWN:
+        elif button == Button.DOWN:
             self.selected = (self.selected + 1) % len(self.pokemon)
-        elif event.button == Button.B:
+        elif button == Button.B:
             return "pokemon_list"
         return None
 
     def update(self, dt: float) -> str | None:
         return None
 
-    def draw(self, surface: pygame.Surface) -> None:
+    def draw(self, image: Image.Image) -> None:
+        draw = ImageDraw.Draw(image)
+        image.paste(Palette.BLACK, (0, 0, *self.size))
         pokemon = self.pokemon[self.selected]
         number = int(pokemon["id"])
         title = f"{number:03d} {str(pokemon['name']).upper()}"
-        panel = draw_content(surface, title)
-        pygame.draw.rect(surface, Palette.SCREEN, panel)
-        pygame.draw.rect(surface, Palette.PANEL_LIGHT, panel, width=1)
+        panel = draw_header(draw, title, self.size[0])
+        draw.rectangle(panel, fill=Palette.SCREEN, outline=Palette.PANEL_LIGHT)
+        draw.text((126, 22), SECTIONS[self.section], fill=Palette.INK, font=font(13))
 
-        self._draw_sprite(surface, panel, pokemon)
-        surface.blit(font(13).render(SECTIONS[self.section], False, Palette.INK), (126, 22))
-
+        self._draw_sprite(draw, panel, pokemon)
         if self.section == 0:
-            self._draw_info(surface, pokemon)
+            self._draw_info(draw, pokemon)
         else:
-            self._draw_stats(surface, pokemon)
+            self._draw_stats(draw, pokemon)
 
-    def _draw_sprite(self, surface: pygame.Surface, panel: pygame.Rect, pokemon: dict[str, object]) -> None:
+    def _draw_sprite(self, draw: ImageDraw.ImageDraw, panel: tuple[int, int, int, int], pokemon: dict[str, object]) -> None:
         types = list(pokemon["types"])
         color = self._type_color(str(types[0]))
-        center = (panel.x + 21, panel.y + 21)
-        pygame.draw.circle(surface, color, center, 15)
-        pygame.draw.circle(surface, Palette.INK, (center[0] - 5, center[1] - 3), 2)
-        pygame.draw.circle(surface, Palette.INK, (center[0] + 5, center[1] - 3), 2)
-        pygame.draw.arc(surface, Palette.INK, (center[0] - 7, center[1] - 2, 14, 9), 0.2, 2.9, 1)
+        center = (panel[0] + 21, panel[1] + 21)
+        draw.ellipse((center[0] - 15, center[1] - 15, center[0] + 15, center[1] + 15), fill=color, outline=Palette.INK)
+        draw.ellipse((center[0] - 7, center[1] - 5, center[0] - 3, center[1] - 1), fill=Palette.INK)
+        draw.ellipse((center[0] + 3, center[1] - 5, center[0] + 7, center[1] - 1), fill=Palette.INK)
+        draw.arc((center[0] - 8, center[1] - 3, center[0] + 8, center[1] + 9), 10, 170, fill=Palette.INK)
 
-    def _draw_info(self, surface: pygame.Surface, pokemon: dict[str, object]) -> None:
+    def _draw_info(self, draw: ImageDraw.ImageDraw, pokemon: dict[str, object]) -> None:
         types = "/".join(str(item).upper() for item in pokemon["types"])
         height = pokemon["height"]
         weight = pokemon["weight"]
-        surface.blit(font(13).render(types, False, Palette.INK), (50, 40))
-        surface.blit(font(13).render(f"HT {height}m  WT {weight}kg", False, Palette.INK), (50, 53))
-        description = str(pokemon["description"]).upper()
-        surface.blit(font(12).render(description[:25], False, Palette.INK), (10, 79))
-        surface.blit(font(12).render(description[25:50], False, Palette.INK), (10, 91))
-        surface.blit(font(12).render(description[50:75], False, Palette.INK), (10, 103))
+        draw.text((50, 40), types, fill=Palette.INK, font=font(13))
+        draw.text((50, 53), f"HT {height}m  WT {weight}kg", fill=Palette.INK, font=font(13))
+        draw_text_lines(draw, str(pokemon["description"]), (10, 79), max_chars=25, max_lines=4)
 
-    def _draw_stats(self, surface: pygame.Surface, pokemon: dict[str, object]) -> None:
+    def _draw_stats(self, draw: ImageDraw.ImageDraw, pokemon: dict[str, object]) -> None:
         stats = dict(pokemon["stats"])
         y = 42
         for label in ("HP", "ATK", "DEF"):
             value = int(stats[label.lower()])
-            surface.blit(font(14).render(label, False, Palette.INK), (50, y))
-            pygame.draw.rect(surface, (116, 135, 118), (79, y + 3, 60, 6))
-            pygame.draw.rect(surface, Palette.RED, (79, y + 3, min(60, value // 2), 6))
+            draw.text((50, y), label, fill=Palette.INK, font=font(14))
+            draw.rectangle((79, y + 3, 139, y + 9), fill=(116, 135, 118))
+            draw.rectangle((79, y + 3, 79 + min(60, value // 2), y + 9), fill=Palette.RED)
             y += 18
 
     def _type_color(self, type_name: str) -> tuple[int, int, int]:

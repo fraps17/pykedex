@@ -5,11 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pokedex"
 version = "0.1.0"
-description = "A pygame Pokédex app for Raspberry Pi Zero and macOS development."
+description = "A Pillow-rendered Pokédex app for Raspberry Pi Zero and macOS development."
 requires-python = ">=3.10"
 dependencies = [
-  "pygame>=2.5",
   "Pillow>=10",
+  "pyglet>=2.0",
 ]
 
 [project.scripts]

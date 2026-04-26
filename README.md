@@ -1,26 +1,27 @@
-# Pokédex App
+# Pokedex
 
-Base pygame app for a Raspberry Pi Zero Pokédex with a 160x128 logical display.
+A small 160x128 Pokédex UI rendered with Pillow.
 
-## Run On macOS
+## Display Mode
+
+Set display mode in `.env`:
+
+```env
+IS_RASPBERRY=0
+```
+
+- `IS_RASPBERRY=0`: render to a scaled desktop window for macOS development
+- `IS_RASPBERRY=1`: render to the ST7735 TFT display
+
+## Run
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
 pip install -e .
 pokedex
 ```
 
-## Run Fullscreen
+Keyboard controls in window mode:
 
-```bash
-pokedex --fullscreen
-```
-
-## Controls
-
-- Arrow keys: UP, DOWN, LEFT, RIGHT
-- Enter or Z: A
-- Escape or X: B
-
-All app screens are designed around the six physical controls: UP, DOWN, LEFT, RIGHT, A, and B.
+- Arrow keys: move
+- Enter or Z: select
+- Escape or X: back

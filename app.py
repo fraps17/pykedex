@@ -1,56 +1,83 @@
 from __future__ import annotations
 
 import json
+import time
 from typing import Protocol
 
-import pygame
+from PIL import Image
 
-from .config import Config
-from . import display
-from .input import InputEvent
-from .screens.boot import BootScreen
-from .screens.home import HomeScreen
-from .screens.pokemon_detail import PokemonDetailScreen
-from .screens.pokemon_list import PokemonListScreen
-from .screens.settings import SettingsScreen
+try:
+    from .config import Config
+    from .display import Display
+    from .input import Button
+    from .screens.home import HomeScreen
+    from .screens.pokemon_detail import PokemonDetailScreen
+    from .screens.pokemon_list import PokemonListScreen
+    from .screens.settings import SettingsScreen
+except ImportError:
+    from config import Config
+    from display import Display
+    from input import Button
+    from screens.home import HomeScreen
+    from screens.pokemon_detail import PokemonDetailScreen
+    from screens.pokemon_list import PokemonListScreen
+    from screens.settings import SettingsScreen
 
 
 class Screen(Protocol):
-    def handle_event(self, event: InputEvent) -> str | None:
+    def handle_button(self, button: Button) -> str | None:
         ...
 
     def update(self, dt: float) -> str | None:
         ...
 
-    def draw(self, surface: pygame.Surface) -> None:
+    def draw(self, image: Image.Image) -> None:
         ...
 
 
 class PokedexApp:
     def __init__(self, config: Config) -> None:
         self.config = config
+        self.display: Display | None = None
         self.running = False
-        self.clock: pygame.time.Clock | None = None
-        self.canvas: pygame.Surface | None = None
         self.pokemon = self._load_pokemon()
         self.selected_pokemon = 0
-        self.current_screen: Screen = BootScreen(config.logical_size)
+        self.current_screen: Screen = HomeScreen(config.logical_size, can_quit=not config.is_raspberry)
+
+    def set_display(self, display: Display) -> None:
+        self.display = display
+
+    def handle_button(self, button: Button) -> None:
+        action = self.current_screen.handle_button(button)
+        self._handle_action(action)
 
     def run(self) -> None:
-        pygame.init()
+        if self.display is None:
+            raise RuntimeError("display must be set before running the app")
 
-        self.clock = pygame.time.Clock()
-        self.canvas = pygame.Surface(self.config.logical_size)
-
+        image = Image.new("RGB", self.config.logical_size)
+        frame_time = 1 / self.config.fps
+        previous = time.monotonic()
         self.running = True
+
         try:
             while self.running:
-                dt = self.clock.tick(self.config.fps) / 1000.0
+                start = time.monotonic()
+                dt = start - previous
+                previous = start
+
                 action = self.current_screen.update(dt)
                 self._handle_action(action)
-                self._draw()
+                self.current_screen.draw(image)
+                self.display.render(image)
+
+                if not self.display.poll():
+                    self.running = False
+
+                elapsed = time.monotonic() - start
+                time.sleep(max(0, frame_time - elapsed))
         finally:
-            pygame.quit()
+            self.display.close()
 
     def _load_pokemon(self) -> list[dict[str, object]]:
         with self.config.data_path.open("r", encoding="utf-8") as file:
@@ -64,22 +91,11 @@ class PokedexApp:
         if action == "quit":
             self.running = False
         elif action == "home":
-            self.current_screen = HomeScreen(self.config.logical_size)
+            self.current_screen = HomeScreen(self.config.logical_size, can_quit=not self.config.is_raspberry)
         elif action == "pokemon_list":
             self.current_screen = PokemonListScreen(self.config.logical_size, self.pokemon, self.selected_pokemon)
         elif action.startswith("pokemon_detail:"):
             self.selected_pokemon = int(action.split(":", 1)[1])
-            self.current_screen = PokemonDetailScreen(
-                self.config.logical_size,
-                self.pokemon,
-                self.selected_pokemon,
-            )
+            self.current_screen = PokemonDetailScreen(self.config.logical_size, self.pokemon, self.selected_pokemon)
         elif action == "settings":
             self.current_screen = SettingsScreen(self.config.logical_size)
-
-    def _draw(self) -> None:
-        if self.canvas is None:
-            return
-
-        self.current_screen.draw(self.canvas)
-        display.render(self.canvas)

@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-import pygame
+from PIL import Image, ImageDraw
 
-from ..input import Button, InputEvent
-from .base import Palette, draw_content, font
+try:
+    from ..input import Button
+except ImportError:
+    from input import Button
+from .base import Palette, draw_header, font
 
 
 MENU_ITEMS = [
@@ -15,34 +18,41 @@ MENU_ITEMS = [
 
 
 class HomeScreen:
-    def __init__(self, size: tuple[int, int]) -> None:
+    def __init__(self, size: tuple[int, int], can_quit: bool = True) -> None:
         self.size = size
+        self.can_quit = can_quit
         self.selected = 0
 
-    def handle_event(self, event: InputEvent) -> str | None:
-        if event.button == Button.UP:
+    def handle_button(self, button: Button) -> str | None:
+        if button == Button.UP:
             self.selected = (self.selected - 1) % len(MENU_ITEMS)
-        elif event.button == Button.DOWN:
+        elif button == Button.DOWN:
             self.selected = (self.selected + 1) % len(MENU_ITEMS)
-        elif event.button == Button.A:
-            return MENU_ITEMS[self.selected][1]
-        elif event.button == Button.B:
+        elif button == Button.A:
+            action = MENU_ITEMS[self.selected][1]
+            if action == "quit" and not self.can_quit:
+                return None
+            return action
+        elif button == Button.B:
+            if not self.can_quit:
+                return None
             return "quit"
         return None
 
     def update(self, dt: float) -> str | None:
         return None
 
-    def draw(self, surface: pygame.Surface) -> None:
-        panel = draw_content(surface, "HOME")
-        pygame.draw.rect(surface, Palette.PANEL, panel)
-        pygame.draw.rect(surface, Palette.PANEL_LIGHT, panel, width=1)
+    def draw(self, image: Image.Image) -> None:
+        draw = ImageDraw.Draw(image)
+        image.paste(Palette.BLACK, (0, 0, *self.size))
+        panel = draw_header(draw, "HOME", self.size[0])
+        draw.rectangle(panel, fill=Palette.PANEL, outline=Palette.PANEL_LIGHT)
 
         for index, (label, action) in enumerate(MENU_ITEMS):
-            y = panel.y + 9 + index * 20
+            y = panel[1] + 9 + index * 20
             if index == self.selected:
-                pygame.draw.rect(surface, Palette.HIGHLIGHT, (panel.x + 5, y - 4, panel.width - 10, 16))
+                draw.rectangle((panel[0] + 5, y - 4, panel[2] - 5, y + 12), fill=Palette.HIGHLIGHT)
                 color = Palette.INK
             else:
-                color = Palette.TEXT if action is not None else (125, 155, 147)
-            surface.blit(font(18).render(label.upper(), False, color), (panel.x + 12, y))
+                color = Palette.TEXT if action is not None else Palette.MUTED
+            draw.text((panel[0] + 12, y), label.upper(), fill=color, font=font(18))

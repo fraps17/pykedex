@@ -1,3 +1,3 @@
-"""Pokedex pygame application."""
+"""Pokedex application."""
 
 __version__ = "0.1.0"
