@@ -46,6 +46,7 @@ class PokedexApp:
 
     def set_display(self, display: Display) -> None:
         self.display = display
+        self.current_screen = HomeScreen(display.size, can_quit=not self.config.is_raspberry)
 
     def handle_button(self, button: Button) -> None:
         action = self.current_screen.handle_button(button)
@@ -55,7 +56,7 @@ class PokedexApp:
         if self.display is None:
             raise RuntimeError("display must be set before running the app")
 
-        image = Image.new("RGB", self.config.logical_size)
+        image = Image.new("RGB", self.display.size)
         frame_time = 1 / self.config.fps
         previous = time.monotonic()
         self.running = True
@@ -91,11 +92,11 @@ class PokedexApp:
         if action == "quit":
             self.running = False
         elif action == "home":
-            self.current_screen = HomeScreen(self.config.logical_size, can_quit=not self.config.is_raspberry)
+            self.current_screen = HomeScreen(self.display.size, can_quit=not self.config.is_raspberry)
         elif action == "pokemon_list":
-            self.current_screen = PokemonListScreen(self.config.logical_size, self.pokemon, self.selected_pokemon)
+            self.current_screen = PokemonListScreen(self.display.size, self.pokemon, self.selected_pokemon)
         elif action.startswith("pokemon_detail:"):
             self.selected_pokemon = int(action.split(":", 1)[1])
-            self.current_screen = PokemonDetailScreen(self.config.logical_size, self.pokemon, self.selected_pokemon)
+            self.current_screen = PokemonDetailScreen(self.display.size, self.pokemon, self.selected_pokemon)
         elif action == "settings":
-            self.current_screen = SettingsScreen(self.config.logical_size)
+            self.current_screen = SettingsScreen(self.display.size)

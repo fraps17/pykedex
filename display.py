@@ -15,6 +15,10 @@ ButtonHandler = Callable[[Button], None]
 
 
 class Display(Protocol):
+    @property
+    def size(self) -> tuple[int, int]:
+        ...
+
     def render(self, image: Image.Image) -> None:
         ...
 
@@ -66,6 +70,19 @@ class TFTDisplay:
             kwargs.pop("height")
             self.disp = ST7735.ST7735(**kwargs)
         self.disp.begin()
+        print(
+            "TFTDisplay",
+            f"public={self.size}",
+            f"internal=({getattr(self.disp, '_width', None)}, {getattr(self.disp, '_height', None)})",
+            f"rotation={getattr(self.disp, '_rotation', None)}",
+        )
+
+    @property
+    def size(self) -> tuple[int, int]:
+        return (
+            int(getattr(self.disp, "width", self.config.width)),
+            int(getattr(self.disp, "height", self.config.height)),
+        )
 
     def render(self, image: Image.Image) -> None:
         if image.mode != "RGB":
@@ -110,6 +127,10 @@ class WindowDisplay:
             on_key_press=self._on_key_press,
             on_text=self._on_text,
         )
+
+    @property
+    def size(self) -> tuple[int, int]:
+        return self.config.size
 
     def render(self, image: Image.Image) -> None:
         if image.mode != "RGB":
