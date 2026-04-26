@@ -50,6 +50,7 @@ class TFTDisplay:
             import ST7735
 
         self.config = config
+        self._logged_first_render = False
         kwargs = {
             "port": 0,
             "cs": ST7735.BG_SPI_CS_BACK,
@@ -87,18 +88,25 @@ class TFTDisplay:
     def render(self, image: Image.Image) -> None:
         if image.mode != "RGB":
             image = image.convert("RGB")
-        driver_size = (
-            int(getattr(self.disp, "width", image.width)),
-            int(getattr(self.disp, "height", image.height)),
-        )
-        if image.size != driver_size:
-            image = image.resize(driver_size, Image.Resampling.NEAREST)
+        if image.size != self.size:
+            image = image.resize(self.size, Image.Resampling.NEAREST)
         if self.config.swap_red_blue:
             red, green, blue = image.split()
             image = Image.merge("RGB", (blue, green, red))
         if self.config.invert_colors:
             image = ImageOps.invert(image)
-        self.disp.display(image)
+        hardware_image = image.transpose(Image.Transpose.ROTATE_90)
+        pixelbytes = _rgb565_bytes(hardware_image)
+        if not self._logged_first_render:
+            self._logged_first_render = True
+            print(
+                "TFTRender",
+                f"logical={image.size}",
+                f"hardware={hardware_image.size}",
+                f"bytes={len(pixelbytes)}",
+            )
+        self.disp.set_window()
+        self.disp.data(pixelbytes)
 
     def poll(self) -> bool:
         return True
@@ -209,3 +217,16 @@ def create_display(is_raspberry: bool, config: DisplayConfig, on_button: ButtonH
     if is_raspberry:
         return TFTDisplay(config)
     return WindowDisplay(config, on_button)
+
+
+def _rgb565_bytes(image: Image.Image) -> list[int]:
+    pixels = image.convert("RGB").tobytes()
+    output: list[int] = []
+    for index in range(0, len(pixels), 3):
+        red = pixels[index]
+        green = pixels[index + 1]
+        blue = pixels[index + 2]
+        color = ((red & 0xF8) << 8) | ((green & 0xFC) << 3) | (blue >> 3)
+        output.append((color >> 8) & 0xFF)
+        output.append(color & 0xFF)
+    return output
