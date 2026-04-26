@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import time
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 
 try:
     from .display import DisplayConfig, TFTDisplay
@@ -63,22 +63,31 @@ def grid() -> Image.Image:
     return image
 
 
+def transform(image: Image.Image, *, swap_red_blue: bool, invert_colors: bool) -> Image.Image:
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+    if swap_red_blue:
+        red, green, blue = image.split()
+        image = Image.merge("RGB", (blue, green, red))
+    if invert_colors:
+        image = ImageOps.invert(image)
+    return image
+
+
+def show_raw(display: TFTDisplay, image: Image.Image) -> None:
+    display.disp.display(image.convert("RGB"))
+
+
 def main() -> None:
-    raw_config = DisplayConfig(
-        width=WIDTH,
-        height=HEIGHT,
-        scale=1,
-        swap_red_blue=False,
-        invert_colors=False,
+    display = TFTDisplay(
+        DisplayConfig(
+            width=WIDTH,
+            height=HEIGHT,
+            scale=1,
+            swap_red_blue=False,
+            invert_colors=False,
+        )
     )
-    corrected_config = DisplayConfig(
-        width=WIDTH,
-        height=HEIGHT,
-        scale=1,
-        swap_red_blue=True,
-        invert_colors=True,
-    )
-    display = TFTDisplay(raw_config)
     tests = [
         ("red", solid((255, 0, 0))),
         ("green", solid((0, 255, 0))),
@@ -89,21 +98,25 @@ def main() -> None:
         ("stripes", stripes()),
         ("grid", grid()),
     ]
+    variants = [
+        ("raw", False, False),
+        ("invert only", False, True),
+        ("swap red/blue only", True, False),
+        ("swap red/blue + invert", True, True),
+    ]
 
     while True:
-        print("raw output")
-        display.config = raw_config
-        for name, image in tests:
-            print(f"showing raw {name}")
-            display.render(image)
-            time.sleep(2)
-
-        print("corrected output: swap_red_blue=True, invert_colors=True")
-        display.config = corrected_config
-        for name, image in tests:
-            print(f"showing corrected {name}")
-            display.render(image)
-            time.sleep(2)
+        for variant_name, swap_red_blue, invert_colors in variants:
+            print(f"variant: {variant_name}")
+            for name, image in tests:
+                print(f"showing {variant_name}: {name}")
+                transformed = transform(
+                    image,
+                    swap_red_blue=swap_red_blue,
+                    invert_colors=invert_colors,
+                )
+                show_raw(display, transformed)
+                time.sleep(2)
 
 
 if __name__ == "__main__":
