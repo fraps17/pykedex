@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from PIL import Image, ImageDraw
+from collections.abc import Callable
+
+from PIL import Image, ImageDraw, ImageOps
 
 try:
     from .display import DisplayConfig, TFTDisplay
@@ -8,19 +10,7 @@ except ImportError:
     from display import DisplayConfig, TFTDisplay
 
 
-def solid(size: tuple[int, int], color: tuple[int, int, int]) -> Image.Image:
-    return Image.new("RGB", size, color)
-
-
-def corners(size: tuple[int, int]) -> Image.Image:
-    width, height = size
-    image = Image.new("RGB", size, (0, 0, 0))
-    draw = ImageDraw.Draw(image)
-    draw.rectangle((0, 0, 31, 31), fill=(255, 0, 0))
-    draw.rectangle((width - 32, 0, width - 1, 31), fill=(0, 255, 0))
-    draw.rectangle((0, height - 32, 31, height - 1), fill=(0, 0, 255))
-    draw.rectangle((width - 32, height - 32, width - 1, height - 1), fill=(255, 255, 0))
-    return image
+LOGICAL_SIZE = (160, 128)
 
 
 def stripes(size: tuple[int, int]) -> Image.Image:
@@ -41,36 +31,14 @@ def stripes(size: tuple[int, int]) -> Image.Image:
     return image
 
 
-def grid(size: tuple[int, int]) -> Image.Image:
-    width, height = size
-    image = Image.new("RGB", size, (8, 10, 14))
-    draw = ImageDraw.Draw(image)
-    for x in range(0, width, 20):
-        draw.rectangle((x, 0, min(x + 2, width - 1), height - 1), fill=(180, 180, 180))
-    for y in range(0, height, 20):
-        draw.rectangle((0, y, width - 1, min(y + 2, height - 1)), fill=(180, 180, 180))
-    draw.rectangle((0, 0, width - 1, height - 1), outline=(255, 255, 255), width=3)
-    return image
-
-
-def inset_borders(size: tuple[int, int]) -> Image.Image:
+def corners(size: tuple[int, int]) -> Image.Image:
     width, height = size
     image = Image.new("RGB", size, (0, 0, 0))
     draw = ImageDraw.Draw(image)
-    colors = [
-        (255, 255, 255),
-        (255, 0, 0),
-        (0, 255, 0),
-        (0, 0, 255),
-        (255, 255, 0),
-    ]
-    for index, color in enumerate(colors):
-        inset = index * 8
-        draw.rectangle(
-            (inset, inset, width - 1 - inset, height - 1 - inset),
-            outline=color,
-            width=4,
-        )
+    draw.rectangle((0, 0, 31, 31), fill=(255, 0, 0))
+    draw.rectangle((width - 32, 0, width - 1, 31), fill=(0, 255, 0))
+    draw.rectangle((0, height - 32, 31, height - 1), fill=(0, 0, 255))
+    draw.rectangle((width - 32, height - 32, width - 1, height - 1), fill=(255, 255, 0))
     return image
 
 
@@ -93,43 +61,83 @@ def center_blocks(size: tuple[int, int]) -> Image.Image:
     return image
 
 
+def correct_colors(image: Image.Image) -> Image.Image:
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+    red, green, blue = image.split()
+    return ImageOps.invert(Image.merge("RGB", (blue, green, red)))
+
+
+def identity(image: Image.Image) -> Image.Image:
+    return image
+
+
+def rotate_90(image: Image.Image) -> Image.Image:
+    return image.transpose(Image.Transpose.ROTATE_90)
+
+
+def rotate_180(image: Image.Image) -> Image.Image:
+    return image.transpose(Image.Transpose.ROTATE_180)
+
+
+def rotate_270(image: Image.Image) -> Image.Image:
+    return image.transpose(Image.Transpose.ROTATE_270)
+
+
+def flip_left_right(image: Image.Image) -> Image.Image:
+    return image.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+
+
+def flip_top_bottom(image: Image.Image) -> Image.Image:
+    return image.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+
+
+def send(display: TFTDisplay, image: Image.Image) -> None:
+    image = correct_colors(image)
+    print("sending image size", image.size)
+    display.disp.display(image)
+
+
 def main() -> None:
     display = TFTDisplay(
         DisplayConfig(
             width=160,
             height=128,
             scale=1,
-            swap_red_blue=True,
-            invert_colors=True,
+            swap_red_blue=False,
+            invert_colors=False,
         )
     )
-    size = (
-        int(getattr(display.disp, "width")),
-        int(getattr(display.disp, "height")),
-    )
-    print("driver-reported width", size[0])
-    print("driver-reported height", size[1])
-    tests = [
-        ("red", solid(size, (255, 0, 0))),
-        ("green", solid(size, (0, 255, 0))),
-        ("blue", solid(size, (0, 0, 255))),
-        ("white", solid(size, (255, 255, 255))),
-        ("black", solid(size, (0, 0, 0))),
-        ("corners", corners(size)),
-        ("stripes", stripes(size)),
-        ("center blocks", center_blocks(size)),
-        ("inset borders", inset_borders(size)),
-        ("thick grid", grid(size)),
+    print("disp public width", getattr(display.disp, "width", None))
+    print("disp public height", getattr(display.disp, "height", None))
+    print("disp internal _width", getattr(display.disp, "_width", None))
+    print("disp internal _height", getattr(display.disp, "_height", None))
+    print("disp rotation", getattr(display.disp, "_rotation", None))
+    print("disp offset_left", getattr(display.disp, "_offset_left", None))
+    print("disp offset_top", getattr(display.disp, "_offset_top", None))
+
+    source_patterns = [
+        ("stripes", stripes),
+        ("corners", corners),
+        ("center blocks", center_blocks),
+    ]
+    transforms: list[tuple[str, Callable[[Image.Image], Image.Image]]] = [
+        ("identity", identity),
+        ("rotate 90", rotate_90),
+        ("rotate 180", rotate_180),
+        ("rotate 270", rotate_270),
+        ("flip left/right", flip_left_right),
+        ("flip top/bottom", flip_top_bottom),
     ]
 
-    index = 0
     while True:
-        name, image = tests[index]
-        print(f"showing {name} at {size[0]}x{size[1]}")
-        print("source image size", image.size)
-        display.render(image)
-        input("press Enter for next test...")
-        index = (index + 1) % len(tests)
+        for pattern_name, make_pattern in source_patterns:
+            base = make_pattern(LOGICAL_SIZE)
+            for transform_name, transform in transforms:
+                image = transform(base)
+                print(f"pattern={pattern_name} transform={transform_name}")
+                send(display, image)
+                input("press Enter for next test...")
 
 
 if __name__ == "__main__":

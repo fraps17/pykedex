@@ -36,6 +36,7 @@ def main() -> None:
     print()
 
     for name in [
+        "image_to_data",
         "display",
         "set_window",
         "command",
@@ -44,7 +45,7 @@ def main() -> None:
         "_set_window",
         "_display",
     ]:
-        value = getattr(disp, name, None)
+        value = getattr(ST7735, name, None) if name == "image_to_data" else getattr(disp, name, None)
         if value is None:
             continue
         print(f"{name} signature:", end=" ")
