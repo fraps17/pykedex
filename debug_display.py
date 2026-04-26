@@ -21,12 +21,10 @@ def solid(color: tuple[int, int, int]) -> Image.Image:
 def corners() -> Image.Image:
     image = Image.new("RGB", (WIDTH, HEIGHT), (0, 0, 0))
     draw = ImageDraw.Draw(image)
-    draw.rectangle((0, 0, 23, 23), fill=(255, 0, 0))
-    draw.rectangle((WIDTH - 24, 0, WIDTH - 1, 23), fill=(0, 255, 0))
-    draw.rectangle((0, HEIGHT - 24, 23, HEIGHT - 1), fill=(0, 0, 255))
-    draw.rectangle((WIDTH - 24, HEIGHT - 24, WIDTH - 1, HEIGHT - 1), fill=(255, 255, 0))
-    draw.text((38, 54), "POKEDEX", fill=(255, 255, 255))
-    draw.text((48, 68), "160x128", fill=(255, 255, 255))
+    draw.rectangle((0, 0, 31, 31), fill=(255, 0, 0))
+    draw.rectangle((WIDTH - 32, 0, WIDTH - 1, 31), fill=(0, 255, 0))
+    draw.rectangle((0, HEIGHT - 32, 31, HEIGHT - 1), fill=(0, 0, 255))
+    draw.rectangle((WIDTH - 32, HEIGHT - 32, WIDTH - 1, HEIGHT - 1), fill=(255, 255, 0))
     return image
 
 
@@ -50,16 +48,41 @@ def stripes() -> Image.Image:
 def grid() -> Image.Image:
     image = Image.new("RGB", (WIDTH, HEIGHT), (8, 10, 14))
     draw = ImageDraw.Draw(image)
-    for x in range(0, WIDTH, 10):
-        fill = (90, 90, 90) if x % 40 else (180, 180, 180)
-        draw.line((x, 0, x, HEIGHT - 1), fill=fill)
-    for y in range(0, HEIGHT, 10):
-        fill = (90, 90, 90) if y % 40 else (180, 180, 180)
-        draw.line((0, y, WIDTH - 1, y), fill=fill)
-    draw.rectangle((0, 0, WIDTH - 1, HEIGHT - 1), outline=(255, 255, 255))
-    draw.text((4, 4), "0,0", fill=(255, 255, 255))
-    draw.text((118, 4), "159,0", fill=(255, 255, 255))
-    draw.text((4, 116), "0,127", fill=(255, 255, 255))
+    for x in range(0, WIDTH, 20):
+        draw.rectangle((x, 0, min(x + 2, WIDTH - 1), HEIGHT - 1), fill=(180, 180, 180))
+    for y in range(0, HEIGHT, 20):
+        draw.rectangle((0, y, WIDTH - 1, min(y + 2, HEIGHT - 1)), fill=(180, 180, 180))
+    draw.rectangle((0, 0, WIDTH - 1, HEIGHT - 1), outline=(255, 255, 255), width=3)
+    return image
+
+
+def inset_borders() -> Image.Image:
+    image = Image.new("RGB", (WIDTH, HEIGHT), (0, 0, 0))
+    draw = ImageDraw.Draw(image)
+    colors = [
+        (255, 255, 255),
+        (255, 0, 0),
+        (0, 255, 0),
+        (0, 0, 255),
+        (255, 255, 0),
+    ]
+    for index, color in enumerate(colors):
+        inset = index * 8
+        draw.rectangle(
+            (inset, inset, WIDTH - 1 - inset, HEIGHT - 1 - inset),
+            outline=color,
+            width=4,
+        )
+    return image
+
+
+def center_blocks() -> Image.Image:
+    image = Image.new("RGB", (WIDTH, HEIGHT), (0, 0, 0))
+    draw = ImageDraw.Draw(image)
+    draw.rectangle((16, 16, 72, 56), fill=(255, 0, 0))
+    draw.rectangle((88, 16, 144, 56), fill=(0, 255, 0))
+    draw.rectangle((16, 72, 72, 112), fill=(0, 0, 255))
+    draw.rectangle((88, 72, 144, 112), fill=(255, 255, 255))
     return image
 
 
@@ -96,27 +119,21 @@ def main() -> None:
         ("black", solid((0, 0, 0))),
         ("corners", corners()),
         ("stripes", stripes()),
-        ("grid", grid()),
-    ]
-    variants = [
-        ("raw", False, False),
-        ("invert only", False, True),
-        ("swap red/blue only", True, False),
-        ("swap red/blue + invert", True, True),
+        ("center blocks", center_blocks()),
+        ("inset borders", inset_borders()),
+        ("thick grid", grid()),
     ]
 
     while True:
-        for variant_name, swap_red_blue, invert_colors in variants:
-            print(f"variant: {variant_name}")
-            for name, image in tests:
-                print(f"showing {variant_name}: {name}")
-                transformed = transform(
-                    image,
-                    swap_red_blue=swap_red_blue,
-                    invert_colors=invert_colors,
-                )
-                show_raw(display, transformed)
-                time.sleep(2)
+        for name, image in tests:
+            print(f"showing corrected {name}")
+            transformed = transform(
+                image,
+                swap_red_blue=True,
+                invert_colors=True,
+            )
+            show_raw(display, transformed)
+            time.sleep(2)
 
 
 if __name__ == "__main__":
