@@ -9,7 +9,7 @@ from PIL import Image
 try:
     from .config import Config
     from .display import Display
-    from .input import Button
+    from .input import Button, GPIOInput
     from .screens.home import HomeScreen
     from .screens.pokemon_detail import PokemonDetailScreen
     from .screens.pokemon_list import PokemonListScreen
@@ -17,7 +17,7 @@ try:
 except ImportError:
     from config import Config
     from display import Display
-    from input import Button
+    from input import Button, GPIOInput
     from screens.home import HomeScreen
     from screens.pokemon_detail import PokemonDetailScreen
     from screens.pokemon_list import PokemonListScreen
@@ -39,6 +39,7 @@ class PokedexApp:
     def __init__(self, config: Config) -> None:
         self.config = config
         self.display: Display | None = None
+        self.gpio_input: GPIOInput | None = None
         self.running = False
         self.dirty = True
         self.pokemon = self._load_pokemon()
@@ -59,6 +60,9 @@ class PokedexApp:
         if self.display is None:
             raise RuntimeError("display must be set before running the app")
 
+        if self.config.is_raspberry:
+            self.gpio_input = GPIOInput(self.handle_button)
+
         image = Image.new("RGB", self.display.size)
         frame_time = 1 / self.config.fps
         previous = time.monotonic()
@@ -70,6 +74,8 @@ class PokedexApp:
                 dt = start - previous
                 previous = start
 
+                if self.gpio_input is not None:
+                    self.gpio_input.poll()
                 action = self.current_screen.update(dt)
                 self._handle_action(action)
                 if self.dirty:
@@ -83,6 +89,8 @@ class PokedexApp:
                 elapsed = time.monotonic() - start
                 time.sleep(max(0, frame_time - elapsed))
         finally:
+            if self.gpio_input is not None:
+                self.gpio_input.close()
             self.display.close()
 
     def _load_pokemon(self) -> list[dict[str, object]]:
