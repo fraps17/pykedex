@@ -58,6 +58,8 @@ class TFTDisplay:
             "rst": "GPIO25",
             "backlight": "GPIO18",
             "rotation": 90,
+            "offset_left": 0,
+            "offset_top": 0,
             "invert": True,
             "bgr": True,
             "spi_speed_hz": 4000000,
@@ -95,18 +97,14 @@ class TFTDisplay:
             image = Image.merge("RGB", (blue, green, red))
         if self.config.invert_colors:
             image = ImageOps.invert(image)
-        hardware_image = image.transpose(Image.Transpose.ROTATE_90)
-        pixelbytes = _rgb565_bytes(hardware_image)
         if not self._logged_first_render:
             self._logged_first_render = True
             print(
                 "TFTRender",
                 f"logical={image.size}",
-                f"hardware={hardware_image.size}",
-                f"bytes={len(pixelbytes)}",
+                "using=st7735.display",
             )
-        self.disp.set_window()
-        self.disp.data(pixelbytes)
+        self.disp.display(image)
 
     def poll(self) -> bool:
         return True
@@ -217,16 +215,3 @@ def create_display(is_raspberry: bool, config: DisplayConfig, on_button: ButtonH
     if is_raspberry:
         return TFTDisplay(config)
     return WindowDisplay(config, on_button)
-
-
-def _rgb565_bytes(image: Image.Image) -> list[int]:
-    pixels = image.convert("RGB").tobytes()
-    output: list[int] = []
-    for index in range(0, len(pixels), 3):
-        red = pixels[index]
-        green = pixels[index + 1]
-        blue = pixels[index + 2]
-        color = ((red & 0xF8) << 8) | ((green & 0xFC) << 3) | (blue >> 3)
-        output.append((color >> 8) & 0xFF)
-        output.append(color & 0xFF)
-    return output
