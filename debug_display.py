@@ -1,125 +1,127 @@
 from __future__ import annotations
 
-from PIL import Image, ImageDraw
+from dataclasses import dataclass
+
+from PIL import Image, ImageDraw, ImageOps
+
 
 try:
-    from .display import DisplayConfig, TFTDisplay
-    from .screens.home import HomeScreen
-    from .screens.pokemon_list import PokemonListScreen
-    from .screens.pokemon_detail import PokemonDetailScreen
+    import st7735 as ST7735
 except ImportError:
-    from display import DisplayConfig, TFTDisplay
-    from screens.home import HomeScreen
-    from screens.pokemon_list import PokemonListScreen
-    from screens.pokemon_detail import PokemonDetailScreen
+    import ST7735
 
 
-SIZE = (160, 128)
+LOGICAL_SIZE = (160, 128)
 
 
-def solid(color: tuple[int, int, int]) -> Image.Image:
-    return Image.new("RGB", SIZE, color)
+@dataclass(frozen=True)
+class Variant:
+    name: str
+    width: int
+    height: int
+    rotation: int
+    offset_left: int | None = None
+    offset_top: int | None = None
 
 
-def stripes() -> Image.Image:
-    image = Image.new("RGB", SIZE, (0, 0, 0))
+def stripes(size: tuple[int, int]) -> Image.Image:
+    width, height = size
+    image = Image.new("RGB", size, (0, 0, 0))
     draw = ImageDraw.Draw(image)
     colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 255)]
+    stripe_width = width // len(colors)
     for index, color in enumerate(colors):
-        x0 = index * 40
-        x1 = 159 if index == len(colors) - 1 else x0 + 39
-        draw.rectangle((x0, 0, x1, 127), fill=color)
+        x0 = index * stripe_width
+        x1 = width - 1 if index == len(colors) - 1 else x0 + stripe_width - 1
+        draw.rectangle((x0, 0, x1, height - 1), fill=color)
     return image
 
 
-def corners() -> Image.Image:
-    image = Image.new("RGB", SIZE, (0, 0, 0))
+def corners(size: tuple[int, int]) -> Image.Image:
+    width, height = size
+    image = Image.new("RGB", size, (0, 0, 0))
     draw = ImageDraw.Draw(image)
     draw.rectangle((0, 0, 31, 31), fill=(255, 0, 0))
-    draw.rectangle((128, 0, 159, 31), fill=(0, 255, 0))
-    draw.rectangle((0, 96, 31, 127), fill=(0, 0, 255))
-    draw.rectangle((128, 96, 159, 127), fill=(255, 255, 0))
+    draw.rectangle((width - 32, 0, width - 1, 31), fill=(0, 255, 0))
+    draw.rectangle((0, height - 32, 31, height - 1), fill=(0, 0, 255))
+    draw.rectangle((width - 32, height - 32, width - 1, height - 1), fill=(255, 255, 0))
     return image
 
 
-def center_blocks() -> Image.Image:
-    image = Image.new("RGB", SIZE, (0, 0, 0))
-    draw = ImageDraw.Draw(image)
-    draw.rectangle((16, 16, 72, 56), fill=(255, 0, 0))
-    draw.rectangle((88, 16, 144, 56), fill=(0, 255, 0))
-    draw.rectangle((16, 72, 72, 112), fill=(0, 0, 255))
-    draw.rectangle((88, 72, 144, 112), fill=(255, 255, 255))
-    return image
+def corrected(image: Image.Image) -> Image.Image:
+    red, green, blue = image.convert("RGB").split()
+    return ImageOps.invert(Image.merge("RGB", (blue, green, red)))
 
 
-def inset_borders() -> Image.Image:
-    image = Image.new("RGB", SIZE, (0, 0, 0))
-    draw = ImageDraw.Draw(image)
-    colors = [(255, 255, 255), (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0)]
-    for index, color in enumerate(colors):
-        inset = index * 8
-        draw.rectangle((inset, inset, 159 - inset, 127 - inset), outline=color, width=4)
-    return image
+def make_display(variant: Variant) -> object:
+    kwargs = {
+        "port": 0,
+        "cs": ST7735.BG_SPI_CS_BACK,
+        "dc": "GPIO24",
+        "rst": "GPIO25",
+        "backlight": "GPIO18",
+        "width": variant.width,
+        "height": variant.height,
+        "rotation": variant.rotation,
+        "invert": True,
+        "bgr": True,
+        "spi_speed_hz": 4000000,
+    }
+    if variant.offset_left is not None:
+        kwargs["offset_left"] = variant.offset_left
+    if variant.offset_top is not None:
+        kwargs["offset_top"] = variant.offset_top
+    return ST7735.ST7735(**kwargs)
 
 
-def screen_image(screen: object) -> Image.Image:
-    image = Image.new("RGB", SIZE, (0, 0, 0))
-    screen.draw(image)
-    return image
+def print_display_info(display: object) -> None:
+    print("public width", getattr(display, "width", None))
+    print("public height", getattr(display, "height", None))
+    print("internal _width", getattr(display, "_width", None))
+    print("internal _height", getattr(display, "_height", None))
+    print("rotation", getattr(display, "_rotation", None))
+    print("offset_left", getattr(display, "_offset_left", None))
+    print("offset_top", getattr(display, "_offset_top", None))
+    print("invert", getattr(display, "_invert", None))
+    print("bgr", getattr(display, "_bgr", None))
+
+
+def image_size_for(display: object) -> tuple[int, int]:
+    return (
+        int(getattr(display, "width")),
+        int(getattr(display, "height")),
+    )
 
 
 def main() -> None:
-    display = TFTDisplay(DisplayConfig(width=160, height=128, scale=1))
-    print("disp public width", getattr(display.disp, "width", None))
-    print("disp public height", getattr(display.disp, "height", None))
-    print("disp internal _width", getattr(display.disp, "_width", None))
-    print("disp internal _height", getattr(display.disp, "_height", None))
-    print("disp rotation", getattr(display.disp, "_rotation", None))
-    print("disp offset_left", getattr(display.disp, "_offset_left", None))
-    print("disp offset_top", getattr(display.disp, "_offset_top", None))
-
-    pokemon = [
-        {
-            "id": 25,
-            "name": "Pikachu",
-            "types": ["Electric"],
-            "height": 0.4,
-            "weight": 6.0,
-            "description": "A mouse Pokemon from deep forests, known for stored electrical energy.",
-            "stats": {"hp": 35, "atk": 55, "def": 40},
-        },
-        {
-            "id": 1,
-            "name": "Bulbasaur",
-            "types": ["Grass", "Poison"],
-            "height": 0.7,
-            "weight": 6.9,
-            "description": "A seed Pokemon from open grasslands.",
-            "stats": {"hp": 45, "atk": 49, "def": 49},
-        },
-    ]
-    tests = [
-        ("red", solid((255, 0, 0))),
-        ("green", solid((0, 255, 0))),
-        ("blue", solid((0, 0, 255))),
-        ("white", solid((255, 255, 255))),
-        ("black", solid((0, 0, 0))),
-        ("stripes", stripes()),
-        ("corners", corners()),
-        ("center blocks", center_blocks()),
-        ("inset borders", inset_borders()),
-        ("home screen", screen_image(HomeScreen(SIZE, can_quit=False))),
-        ("pokemon list", screen_image(PokemonListScreen(SIZE, pokemon))),
-        ("pokemon detail", screen_image(PokemonDetailScreen(SIZE, pokemon, 0))),
+    variants = [
+        Variant("160x128 rot0 default offsets", 160, 128, 0),
+        Variant("160x128 rot90 default offsets", 160, 128, 90),
+        Variant("128x160 rot90 default offsets", 128, 160, 90),
+        Variant("128x160 rot0 default offsets", 128, 160, 0),
+        Variant("160x128 rot0 offsets 0,0", 160, 128, 0, 0, 0),
+        Variant("160x128 rot90 offsets 0,0", 160, 128, 90, 0, 0),
+        Variant("128x160 rot90 offsets 0,0", 128, 160, 90, 0, 0),
+        Variant("128x160 rot0 offsets 0,0", 128, 160, 0, 0, 0),
     ]
 
-    index = 0
-    while True:
-        name, image = tests[index]
-        print(f"showing {name}, image size {image.size}")
-        display.render(image)
-        input("press Enter for next test...")
-        index = (index + 1) % len(tests)
+    for variant in variants:
+        print()
+        print("=" * 60)
+        print(variant.name)
+        display = make_display(variant)
+        print_display_info(display)
+        size = image_size_for(display)
+
+        for pattern_name, image in [
+            ("stripes", stripes(size)),
+            ("corners", corners(size)),
+        ]:
+            print(f"showing {pattern_name}, image size {image.size}")
+            display.display(corrected(image))
+            input("press Enter for next pattern...")
+
+        input("press Enter for next variant...")
 
 
 if __name__ == "__main__":
