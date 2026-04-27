@@ -86,6 +86,28 @@ def print_display_info(display: object) -> None:
     print("bgr", getattr(display, "_bgr", None))
 
 
+def release_display(display: object) -> None:
+    for attr in ("_dc", "_rst", "_bl"):
+        value = getattr(display, attr, None)
+        if not value:
+            continue
+        request = value[0] if isinstance(value, tuple) else value
+        release = getattr(request, "release", None)
+        if callable(release):
+            try:
+                release()
+            except Exception as error:
+                print(f"could not release {attr}: {error}")
+
+    spi = getattr(display, "_spi", None)
+    close = getattr(spi, "close", None)
+    if callable(close):
+        try:
+            close()
+        except Exception as error:
+            print(f"could not close spi: {error}")
+
+
 def image_size_for(display: object) -> tuple[int, int]:
     return (
         int(getattr(display, "width")),
@@ -122,6 +144,7 @@ def main() -> None:
             input("press Enter for next pattern...")
 
         input("press Enter for next variant...")
+        release_display(display)
 
 
 if __name__ == "__main__":
