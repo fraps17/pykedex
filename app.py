@@ -44,11 +44,11 @@ class PokedexApp:
         self.dirty = True
         self.pokemon = self._load_pokemon()
         self.selected_pokemon = 0
-        self.current_screen: Screen = HomeScreen(config.logical_size, can_quit=not config.is_raspberry)
+        self.current_screen: Screen = PokemonDetailScreen(config.logical_size, self.pokemon, self.selected_pokemon)
 
     def set_display(self, display: Display) -> None:
         self.display = display
-        self.current_screen = HomeScreen(display.size, can_quit=not self.config.is_raspberry)
+        self.current_screen = PokemonDetailScreen(display.size, self.pokemon, self.selected_pokemon)
         self.dirty = True
 
     def handle_button(self, button: Button) -> None:
