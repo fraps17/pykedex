@@ -19,10 +19,10 @@ ButtonHandler = Callable[[Button], None]
 
 class GPIOInput:
     PIN_TO_BUTTON = {
-        17: Button.UP,
-        27: Button.DOWN,
-        22: Button.B,
-        23: Button.A,
+        35: Button.UP,
+        37: Button.DOWN,
+        38: Button.B,
+        40: Button.A,
     }
 
     def __init__(self, on_button: ButtonHandler, debounce_seconds: float = 0.18) -> None:
