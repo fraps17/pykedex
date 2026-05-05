@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import argparse
 
-try:
-    from .app import PokedexApp
-    from .config import Config
-    from .display import DisplayConfig, create_display
-except ImportError:
+if __package__ in (None, ""):
     from app import PokedexApp
     from config import Config
     from display import DisplayConfig, create_display
+else:
+    from .app import PokedexApp
+    from .config import Config
+    from .display import DisplayConfig, create_display
 
 
 def parse_args() -> argparse.Namespace:
