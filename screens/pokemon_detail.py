@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from PIL import Image, ImageDraw
 
 try:
@@ -10,6 +12,8 @@ from .base import Palette, draw_header, draw_text_lines, font
 
 
 SECTIONS = ("INFO", "STATS")
+SPRITE_DIR = Path(__file__).resolve().parents[1] / "data" / "sprites"
+SPRITE_BOX = (8, 24, 46, 62)
 
 
 class PokemonDetailScreen:
@@ -18,6 +22,7 @@ class PokemonDetailScreen:
         self.pokemon = pokemon
         self.selected = selected
         self.section = 0
+        self.sprites: dict[int, Image.Image | None] = {}
 
     def handle_button(self, button: Button) -> str | None:
         if button == Button.LEFT:
@@ -45,13 +50,28 @@ class PokemonDetailScreen:
         draw.rectangle(panel, fill=Palette.SCREEN, outline=Palette.PANEL_LIGHT)
         draw.text((126, 22), SECTIONS[self.section], fill=Palette.INK, font=font(13))
 
-        self._draw_sprite(draw, panel, pokemon)
+        self._draw_sprite(image, draw, panel, pokemon)
         if self.section == 0:
             self._draw_info(draw, pokemon)
         else:
             self._draw_stats(draw, pokemon)
 
-    def _draw_sprite(self, draw: ImageDraw.ImageDraw, panel: tuple[int, int, int, int], pokemon: dict[str, object]) -> None:
+    def _draw_sprite(
+        self,
+        image: Image.Image,
+        draw: ImageDraw.ImageDraw,
+        panel: tuple[int, int, int, int],
+        pokemon: dict[str, object],
+    ) -> None:
+        number = int(pokemon["id"])
+        sprite = self._load_sprite(number)
+        if sprite is not None:
+            x0, y0, x1, y1 = SPRITE_BOX
+            x = x0 + ((x1 - x0) - sprite.width) // 2
+            y = y0 + ((y1 - y0) - sprite.height) // 2
+            image.paste(sprite, (x, y), sprite)
+            return
+
         types = list(pokemon["types"])
         color = self._type_color(str(types[0]))
         center = (panel[0] + 21, panel[1] + 21)
@@ -59,6 +79,17 @@ class PokemonDetailScreen:
         draw.ellipse((center[0] - 7, center[1] - 5, center[0] - 3, center[1] - 1), fill=Palette.INK)
         draw.ellipse((center[0] + 3, center[1] - 5, center[0] + 7, center[1] - 1), fill=Palette.INK)
         draw.arc((center[0] - 8, center[1] - 3, center[0] + 8, center[1] + 9), 10, 170, fill=Palette.INK)
+
+    def _load_sprite(self, number: int) -> Image.Image | None:
+        if number not in self.sprites:
+            path = SPRITE_DIR / f"{number}.png"
+            if not path.exists():
+                self.sprites[number] = None
+            else:
+                sprite = Image.open(path).convert("RGBA")
+                sprite.thumbnail((38, 38), Image.Resampling.NEAREST)
+                self.sprites[number] = sprite
+        return self.sprites[number]
 
     def _draw_info(self, draw: ImageDraw.ImageDraw, pokemon: dict[str, object]) -> None:
         types = "/".join(str(item).upper() for item in pokemon["types"])
